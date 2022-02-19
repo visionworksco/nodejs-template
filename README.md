@@ -1,1 +1,1 @@
-# EnoCockpit Intraday server
+# @visionworksco/nodejs-template

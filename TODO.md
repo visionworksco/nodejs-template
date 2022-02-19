@@ -7,3 +7,4 @@ env
 config
 auth
 pm2
+debug
