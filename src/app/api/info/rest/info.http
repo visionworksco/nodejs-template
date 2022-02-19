@@ -1,0 +1,10 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/info
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### findById
+GET {{url}}/undefined {{protocol}}
+Content-Type: {{contentTypeJson}}

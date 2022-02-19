@@ -1,0 +1,10 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/mule/epexObContracts
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### findAll
+GET {{url}}?seriesname=top&longname=2021101413:45-2021101414:00 {{protocol}}
+Content-Type: {{contentTypeJson}}

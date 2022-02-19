@@ -1,0 +1,11 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/gapi/search
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+@entityId = 1
+
+### findAll
+GET {{url}}?source=Meteologica&name=PV_forecast_Meteologica_Total_latest&ts_start=2021-07-04T08:09:36.079Z&time=local {{protocol}}
+Content-Type: {{contentTypeJson}}

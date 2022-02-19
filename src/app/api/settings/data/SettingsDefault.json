@@ -1,0 +1,11 @@
+{
+  "data": {
+    "enobotRequest": {
+      "grid": ["RWE", "EON", "ENBW", "VE"],
+      "volumeMin": 0.1,
+      "volumeMax": 50,
+      "duration": ["15min", "1h"],
+      "limitType": ["MaxPrice", "MinPrice"]
+    }
+  }
+}

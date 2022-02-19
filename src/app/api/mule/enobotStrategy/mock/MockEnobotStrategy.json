@@ -1,0 +1,26 @@
+[
+  {
+    "id": "7CA7A03E-FB18-45B0-A531-074E4B2EB551",
+    "strategy": "{\"pr\":[0.5,0.5,0.5,0.5,0.5],\"steps\":5,\"enoEnd\":1800,\"volumes\":[20,20,20,20,20],\"timeSteps\":[20,20,20,20,20],\"enoStart\":null}",
+    "name": "Default",
+    "author": "Davit",
+    "saveDate": "2021-02-17T11:17:57.317",
+    "note": "divide into 5 equal parts "
+  },
+  {
+    "id": "D8F6F1FC-F820-4099-8645-D24E82B9F0D3",
+    "strategy": "{\"pr\":[0.0],\"steps\":1,\"enoEnd\":864000,\"volumes\":[100],\"timeSteps\":[0],\"enoStart\":null}",
+    "name": "close100",
+    "author": "Davit",
+    "saveDate": "2021-03-09T10:58:15.517",
+    "note": "immediate closing of the position"
+  },
+  {
+    "id": "CD46A450-C17A-478C-BDF3-EAF1D6CE5790",
+    "strategy": "{\"pr\":[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5],\"steps\":10,\"enoEnd\":1800,\"volumes\":[10,10,10,10,10,10,10,10,10,10],\"timeSteps\":[10,10,10,10,10,10,10,10,10,10],\"enoStart\":null}",
+    "name": "def10",
+    "author": "Davit",
+    "saveDate": "2021-02-19T09:48:43.613",
+    "note": "divide into 10 equal parts "
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "debug nodejs ts",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "ENO_ENV": "dev.local",
+        "DEBUG": "true",
+        "MOCK_DATA": "true"
+      },
+      "envFile": "${workspaceFolder}/.env_dev.local",
+      "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "program": "${workspaceFolder}/src/app/index.ts"
+    },
+    {
+      "type": "node",
+      "name": "debug current unit tests",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "cwd": "${workspaceFolder}",
+      "args": ["${fileBasenameNoExtension}", "--config", "jest.config.js", "--group=unit"]
+    },
+    {
+      "type": "node",
+      "name": "debug current integration tests",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "${fileBasenameNoExtension}",
+        "--config",
+        "jest.config.integration.js",
+        "--group=integration"
+      ]
+    }
+  ]
+}
