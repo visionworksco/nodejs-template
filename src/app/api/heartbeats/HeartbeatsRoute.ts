@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { HeartbeatsController } from './HeartbeatsController';
 import { HeartbeatsEntity } from './HeartbeatsEntity';
 

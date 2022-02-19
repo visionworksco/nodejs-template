@@ -1,4 +1,4 @@
-import { BaseRequest, BaseResult, StatusCode } from '@visionworksco/expressjs-middleware';
+import { BaseRequest, BaseResult, StatusCode } from '@visionworksco/nodejs-middleware';
 import { Response } from 'express';
 import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { SettingsEntity } from './SettingsEntity';

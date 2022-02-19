@@ -4,7 +4,7 @@ import {
   ServerException,
   StatusCode,
   StatusCodeReason,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { Pool } from 'pg';
 import { BaseApiPsqlRepository } from '../../repository/postgresql/BaseApiPsqlRepository';
 import { SqlTable } from '../../repository/postgresql/SqlTable';

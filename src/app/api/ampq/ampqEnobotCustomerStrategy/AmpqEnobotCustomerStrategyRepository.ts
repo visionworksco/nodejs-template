@@ -3,7 +3,7 @@ import {
   PageResult,
   Repository,
   ServerException,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { AmpqEnobotCustomerStrategyEntity } from './AmpqEnobotCustomerStrategyEntity';
 
 export class AmpqEnobotCustomerStrategyRepository

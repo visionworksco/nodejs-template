@@ -1,4 +1,4 @@
-import { ApiEntity, BasePsqlRepository } from '@visionworksco/expressjs-middleware';
+import { ApiEntity, BasePsqlRepository } from '@visionworksco/nodejs-middleware';
 import { Pool } from 'pg';
 import { ClassTransformer, Clazz } from '../../class/ClassTransformer';
 

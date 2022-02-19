@@ -1,4 +1,4 @@
-import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/expressjs-middleware';
+import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
 import { AmpqConfig } from './AmpqConfig';
 import { AmpqExchangeName } from './AmpqExchangeName';
 

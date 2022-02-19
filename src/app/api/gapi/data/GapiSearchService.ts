@@ -1,4 +1,4 @@
-import { DateUtils, PageRequest, Paginator } from '@visionworksco/expressjs-middleware';
+import { DateUtils, PageRequest, Paginator } from '@visionworksco/nodejs-middleware';
 import { AxiosRequestConfig } from 'axios';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';

@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { EpexMetaController } from './EpexMetaController';
 import { EpexMetaEntity } from './EpexMetaEntity';
 

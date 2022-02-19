@@ -1,4 +1,4 @@
-import { ApiEntity } from '@visionworksco/expressjs-middleware';
+import { ApiEntity } from '@visionworksco/nodejs-middleware';
 
 export interface EpexMeta extends ApiEntity {
   seriesname: string | null;

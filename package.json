@@ -1,33 +1,33 @@
 {
-  "name": "intraday-cockpit-back",
-  "version": "1.0.1",
-  "private": true,
-  "description": "EnoCockpit Intraday server",
-  "license": "Apache-2.0",
+  "name": "@visionworksco/nodejs-template",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Node.js template",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.enovos.eu:Biz-IT/intraday-cockpit-back.git"
+    "url": "git@github.com:visionworksco/nodejs-template.git"
   },
-  "author": "Enovos Luxembourg S.A.",
+  "author": "VisionWorks",
   "homepage": "/",
   "bugs": {
-    "url": "https://gitlab.enovos.eu/Biz-IT/intraday-cockpit-back/-/issues"
+    "url": "https://github.com/visionworksco/nodejs-template/issues"
   },
   "main": "src/app/index.ts",
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "build": "npm run clean && npm run compile && tsc -p tsconfig.build.json",
     "clean": "rimraf dist && rimraf coverage",
     "commit": "git add . && git commit -m 'feat: :rocket:'",
     "compile": "tsc --noEmit",
-    "dependencies_check": "license-checker --production --json --out licenses.json",
     "format": "prettier --write .",
     "lint": "eslint '**/*.{js,ts}' --fix",
+    "lint:license": "license-checker --production --json --out licenses.json",
     "lint:node_modules": "./nm-lint.sh",
     "lint:staged": "lint-staged",
     "postinstall": "husky install",
     "setup:app": "node ./src/app/setup.js",
     "setup:app:dev": "cross-env NODE_ENV=development.local npm run setup:app",
-    "start": "npm run start:dev",
+    "start": "npm run start:dev:mock",
     "start:dev": "cross-env NODE_ENV=development.local DEBUG=true npm run start:watch",
     "start:dev:mock": "cross-env NODE_ENV=development.local DEBUG=true MOCK_DATA=true npm run start:watch",
     "start:prod": "node dist/app/index.js",
@@ -36,17 +36,17 @@
     "start:watch": "nodemon --watch 'src/**/*.{js,ts}' --ignore 'src/**/*.test.{js,ts}' --ext 'js,ts' --exec 'ts-node' .",
     "test": "npm run test:unit",
     "test:all": "npm run test:unit && npm run test:integration",
-    "test:coverage": "jest --config jest.config.js --group=unit --coverage",
-    "test:dev": "jest --config jest.config.js --group=unit --watch",
-    "test:integration": "jest --config jest.config.integration.js --group=integration",
-    "test:staged": "jest --config jest.config.integration.js --onlyChanged",
-    "test:unit": "jest --config jest.config.js --group=unit"
+    "test:coverage": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --coverage",
+    "test:dev": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --watch",
+    "test:integration": "cross-env NODE_ENV=test jest --config jest.config.integration.js --group=integration",
+    "test:staged": "cross-env NODE_ENV=test jest --config jest.config.integration.js --onlyChanged",
+    "test:unit": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit"
   },
   "keywords": [
-    "enovos"
+    "visionworks"
   ],
   "dependencies": {
-    "@visionworksco/expressjs-middleware": "^1.5.0",
+    "@visionworksco/nodejs-middleware": "^2.1.0",
     "amqplib": "^0.8.0",
     "atob": "^2.1.2",
     "axios": "^0.21.1",

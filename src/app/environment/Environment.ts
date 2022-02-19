@@ -1,4 +1,4 @@
-import { ServerException, StatusCode } from '@visionworksco/expressjs-middleware';
+import { ServerException, StatusCode } from '@visionworksco/nodejs-middleware';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import { EnvironmentUtils } from './EnvironmentUtils';

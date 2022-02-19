@@ -1,4 +1,4 @@
-import { Logger, PsqlPool } from '@visionworksco/expressjs-middleware';
+import { Logger, PsqlPool } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';

@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { BooleanUtils } from '@visionworksco/expressjs-middleware';
+import { BooleanUtils } from '@visionworksco/nodejs-middleware';
 import { Expose, Transform } from 'class-transformer';
 import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
 

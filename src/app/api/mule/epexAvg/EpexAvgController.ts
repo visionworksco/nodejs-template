@@ -1,4 +1,4 @@
-import { BaseRequest, PageRequest, StatusCode } from '@visionworksco/expressjs-middleware';
+import { BaseRequest, PageRequest, StatusCode } from '@visionworksco/nodejs-middleware';
 import { Response } from 'express';
 import { BaseApiCrudController } from '../../../controller/BaseApiCrudController';
 import { EpexAvgEntity } from './EpexAvgEntity';

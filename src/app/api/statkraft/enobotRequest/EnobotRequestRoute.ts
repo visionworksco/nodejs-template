@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { EnobotRequestController } from './EnobotRequestController';
 import { EnobotRequestEntity } from './EnobotRequestEntity';
 

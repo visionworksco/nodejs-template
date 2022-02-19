@@ -2,7 +2,7 @@
  * @group unit
  */
 
-import { PageRequest, PageResult, Paginator } from '@visionworksco/expressjs-middleware';
+import { PageRequest, PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import axios from 'axios';
 import { EnvironmentUtils } from '../../../../environment/EnvironmentUtils';
 import { EnobotRequestEntity } from '../EnobotRequestEntity';

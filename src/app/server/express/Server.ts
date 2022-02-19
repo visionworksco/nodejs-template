@@ -11,7 +11,7 @@ import {
   StaticFolderRegister,
   StatusCode,
   UrlEncoder,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import express, { Application } from 'express';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';

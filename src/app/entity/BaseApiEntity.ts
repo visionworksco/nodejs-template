@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { ApiEntity } from '@visionworksco/expressjs-middleware';
+import { ApiEntity } from '@visionworksco/nodejs-middleware';
 import { Expose, Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 

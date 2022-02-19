@@ -1,4 +1,4 @@
-import { AuthUtils } from '@visionworksco/expressjs-middleware';
+import { AuthUtils } from '@visionworksco/nodejs-middleware';
 import axios, { AxiosInstance } from 'axios';
 import { Config } from '../config/Config';
 import { EnvironmentUtils } from '../environment/EnvironmentUtils';

@@ -1,4 +1,4 @@
-import { Storage } from '@visionworksco/expressjs-middleware';
+import { Storage } from '@visionworksco/nodejs-middleware';
 
 // TODO: refactor to Mongodb + PSQL or MongodbStorages or remove
 export class Storages {

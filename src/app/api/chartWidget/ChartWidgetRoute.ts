@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { RequestHandler } from 'express';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { ChartWidgetController } from './ChartWidgetController';

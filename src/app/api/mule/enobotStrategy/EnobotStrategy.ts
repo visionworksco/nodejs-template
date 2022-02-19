@@ -1,4 +1,4 @@
-import { ApiEntity } from '@visionworksco/expressjs-middleware';
+import { ApiEntity } from '@visionworksco/nodejs-middleware';
 import { EnobotStrategyData } from '../enobotStrategyData/EnobotStrategyData';
 
 export interface EnobotStrategy extends ApiEntity {

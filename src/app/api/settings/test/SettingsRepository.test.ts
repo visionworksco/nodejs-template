@@ -2,7 +2,7 @@
  * @group unit
  */
 
-import { ServerException } from '@visionworksco/expressjs-middleware';
+import { ServerException } from '@visionworksco/nodejs-middleware';
 import { SettingsRepository } from '../SettingsRepository';
 
 jest.mock('pg');

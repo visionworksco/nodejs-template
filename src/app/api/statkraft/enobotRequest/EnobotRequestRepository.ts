@@ -3,7 +3,7 @@ import {
   PageResult,
   Repository,
   ServerException,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnobotRequestEntity } from './EnobotRequestEntity';
 

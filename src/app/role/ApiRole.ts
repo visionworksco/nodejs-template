@@ -1,3 +1,3 @@
-import { Role } from '@visionworksco/expressjs-middleware';
+import { Role } from '@visionworksco/nodejs-middleware';
 
 export type ApiRole = Role;

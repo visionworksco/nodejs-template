@@ -2,7 +2,7 @@
 
 set -e
 
-# App declaration
+# app declaration
 export NODE_ENV=${NODE_ENV:=development.local}
 export PROJECT=`node -pe "require('./package.json').name"`
 export PORT=${PORT:=8080}

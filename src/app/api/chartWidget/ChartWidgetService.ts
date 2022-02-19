@@ -1,4 +1,4 @@
-import { PageRequest, PageResult } from '@visionworksco/expressjs-middleware';
+import { PageRequest, PageResult } from '@visionworksco/nodejs-middleware';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { ChartWidgetEntity } from './ChartWidgetEntity';
 import { ChartWidgetRepository } from './ChartWidgetRepository';

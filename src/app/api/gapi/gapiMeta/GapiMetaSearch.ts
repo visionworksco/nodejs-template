@@ -1,4 +1,4 @@
-import { ApiEntity } from '@visionworksco/expressjs-middleware';
+import { ApiEntity } from '@visionworksco/nodejs-middleware';
 import { GapiMeta } from './GapiMeta';
 
 export interface GapiMetaSearch extends ApiEntity {

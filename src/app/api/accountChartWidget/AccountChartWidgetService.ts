@@ -1,4 +1,4 @@
-import { ServerException } from '@visionworksco/expressjs-middleware';
+import { ServerException } from '@visionworksco/nodejs-middleware';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { AccountChartWidgetEntity } from './AccountChartWidgetEntity';
 import { AccountChartWidgetRepository } from './AccountChartWidgetRepository';

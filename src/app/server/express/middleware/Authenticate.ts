@@ -3,7 +3,7 @@ import {
   AuthUser,
   BaseRequest,
   ServerException,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { NextFunction, RequestHandler, Response } from 'express';
 import { AccessTokenParser } from '../../../token/AccessTokenParser';
 

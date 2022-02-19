@@ -1,4 +1,4 @@
-import { ApiEntity } from '@visionworksco/expressjs-middleware';
+import { ApiEntity } from '@visionworksco/nodejs-middleware';
 import { EnobotTimeSerie } from '../../../type/EnobotTimeSerie';
 import { GapiSearchType } from './GapiSearchType';
 

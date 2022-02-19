@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { SettingsController } from './SettingsController';

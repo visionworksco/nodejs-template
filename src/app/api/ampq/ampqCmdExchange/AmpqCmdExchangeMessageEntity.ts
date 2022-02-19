@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { DateUtils } from '@visionworksco/expressjs-middleware';
+import { DateUtils } from '@visionworksco/nodejs-middleware';
 import { Expose } from 'class-transformer';
 import { v4 as uuidv4 } from 'uuid';
 import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';

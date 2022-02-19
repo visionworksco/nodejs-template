@@ -2,7 +2,7 @@
  * @group unit
  */
 
-import { ServerException } from '@visionworksco/expressjs-middleware';
+import { ServerException } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../../../class/ClassTransformer';
 import { EnobotRequestEntity } from '../EnobotRequestEntity';
 import { EnobotRequestRepository } from '../EnobotRequestRepository';

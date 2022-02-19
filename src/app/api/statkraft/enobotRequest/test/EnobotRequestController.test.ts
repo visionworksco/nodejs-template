@@ -2,12 +2,7 @@
  * @group unit
  */
 
-import {
-  PageRequest,
-  PageResult,
-  Paginator,
-  StatusCode,
-} from '@visionworksco/expressjs-middleware';
+import { PageRequest, PageResult, Paginator, StatusCode } from '@visionworksco/nodejs-middleware';
 import { EnobotRequestController } from '../EnobotRequestController';
 import { EnobotRequestEntity } from '../EnobotRequestEntity';
 import { EnobotRequestRepository } from '../EnobotRequestRepository';

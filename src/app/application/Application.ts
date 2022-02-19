@@ -1,4 +1,4 @@
-import { ExceptionHandler, Logger } from '@visionworksco/expressjs-middleware';
+import { ExceptionHandler, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
 import { Environment } from '../environment/Environment';
 import { Server } from '../server/express/Server';

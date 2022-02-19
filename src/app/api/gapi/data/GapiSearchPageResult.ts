@@ -1,4 +1,4 @@
-import { PageResult, Paginator } from '@visionworksco/expressjs-middleware';
+import { PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import { HttpError } from 'http-errors';
 import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
 import { GapiSearchType } from './GapiSearchType';

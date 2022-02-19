@@ -1,4 +1,4 @@
-import { Logger } from '@visionworksco/expressjs-middleware';
+import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { Context } from '../../../context/Context';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';

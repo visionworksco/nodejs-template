@@ -1,4 +1,4 @@
-import { BaseCrudService, Repository } from '@visionworksco/expressjs-middleware';
+import { BaseCrudService, Repository } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../class/ClassTransformer';
 import { BaseApiEntity } from '../entity/BaseApiEntity';
 

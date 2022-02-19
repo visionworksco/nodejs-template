@@ -4,7 +4,7 @@ import {
   Route,
   StaticFolderRegister,
   UndefinedRoute,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { Application, Request, Response } from 'express';
 import path from 'path';
 import { AccountController } from '../../api/account/AccountController';

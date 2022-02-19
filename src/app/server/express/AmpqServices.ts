@@ -1,4 +1,4 @@
-import { AmpqService } from '@visionworksco/expressjs-middleware';
+import { AmpqService } from '@visionworksco/nodejs-middleware';
 
 export class AmpqServices {
   private services: AmpqService[] = [];

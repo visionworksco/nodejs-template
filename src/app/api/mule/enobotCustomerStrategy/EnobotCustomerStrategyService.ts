@@ -1,4 +1,4 @@
-import { PageRequest, PageResult, Paginator } from '@visionworksco/expressjs-middleware';
+import { PageRequest, PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
 import { BaseApiCrudService } from '../../../service/BaseApiCrudService';

@@ -2,7 +2,7 @@
  * @group unit
  */
 
-import { BaseResult, StatusCode } from '@visionworksco/expressjs-middleware';
+import { BaseResult, StatusCode } from '@visionworksco/nodejs-middleware';
 import { nanoid } from 'nanoid';
 import { SettingsController } from '../SettingsController';
 import { SettingsEntity } from '../SettingsEntity';

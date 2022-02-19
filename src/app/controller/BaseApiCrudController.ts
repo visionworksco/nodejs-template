@@ -3,7 +3,7 @@ import {
   BaseRequest,
   CrudService,
   DateUtils,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { ClassTransformer, Clazz } from '../class/ClassTransformer';
 import { BaseApiEntity } from '../entity/BaseApiEntity';
 import { ControllerUtils } from './ControllerUtils';

@@ -1,4 +1,4 @@
-import { AuthUser, Roles } from '@visionworksco/expressjs-middleware';
+import { AuthUser, Roles } from '@visionworksco/nodejs-middleware';
 import { ApiRole } from '../ApiRole';
 import { Admin } from './Admin';
 import { ApplicationRole } from './ApplicationRole';

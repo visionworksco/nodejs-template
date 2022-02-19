@@ -1,4 +1,4 @@
-import { BaseRequest, StatusCode } from '@visionworksco/expressjs-middleware';
+import { BaseRequest, StatusCode } from '@visionworksco/nodejs-middleware';
 import { Response } from 'express';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { BaseApiCrudController } from '../../../controller/BaseApiCrudController';

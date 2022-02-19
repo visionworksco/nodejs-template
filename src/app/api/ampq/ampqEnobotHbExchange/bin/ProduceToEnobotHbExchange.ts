@@ -1,4 +1,4 @@
-import { AsyncUtils, DateUtils, Logger } from '@visionworksco/expressjs-middleware';
+import { AsyncUtils, DateUtils, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
 import { AmpqEnobotHbExchangeMessageModule } from '../AmpqEnobotHbExchangeMessageModule';
 import { AmpqEnobotHbExchangeService } from '../AmpqEnobotHbExchangeService';

@@ -6,7 +6,7 @@ import {
   PageRequest,
   ServerException,
   StatusCode,
-} from '@visionworksco/expressjs-middleware';
+} from '@visionworksco/nodejs-middleware';
 import { Response } from 'express';
 import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { ControllerUtils } from '../../controller/ControllerUtils';

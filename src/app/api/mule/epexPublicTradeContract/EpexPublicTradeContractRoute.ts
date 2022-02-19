@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { EpexPublicTradeContractController } from './EpexPublicTradeContractController';
 import { EpexPublicTradeContractEntity } from './EpexPublicTradeContractEntity';
 

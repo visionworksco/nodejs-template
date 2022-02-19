@@ -2,7 +2,7 @@
  * @group integration
  */
 
-import { DateUtils } from '@visionworksco/expressjs-middleware';
+import { DateUtils } from '@visionworksco/nodejs-middleware';
 
 describe('Example', () => {
   test('Example', () => {

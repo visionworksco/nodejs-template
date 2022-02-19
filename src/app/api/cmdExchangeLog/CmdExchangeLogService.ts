@@ -1,4 +1,4 @@
-import { DateUtils, PageRequest, PageResult } from '@visionworksco/expressjs-middleware';
+import { DateUtils, PageRequest, PageResult } from '@visionworksco/nodejs-middleware';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { CmdExchangeLogEntity } from './CmdExchangeLogEntity';

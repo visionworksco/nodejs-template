@@ -1,4 +1,4 @@
-import { BaseCrudRoute } from '@visionworksco/expressjs-middleware';
+import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
 import { GapiSearchController } from './GapiSearchController';
 

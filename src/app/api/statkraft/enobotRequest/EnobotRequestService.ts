@@ -1,4 +1,4 @@
-import { DateUtils, PageRequest, PageResult, Paginator } from '@visionworksco/expressjs-middleware';
+import { DateUtils, PageRequest, PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import { AxiosRequestConfig } from 'axios';
 import moment from 'moment';
 import { nanoid } from 'nanoid';

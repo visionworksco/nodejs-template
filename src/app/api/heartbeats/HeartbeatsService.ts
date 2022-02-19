@@ -1,4 +1,4 @@
-import { PageRequest, PageResult, Paginator } from '@visionworksco/expressjs-middleware';
+import { PageRequest, PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import { Context } from '../../context/Context';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { HeartbeatsEntity } from './HeartbeatsEntity';

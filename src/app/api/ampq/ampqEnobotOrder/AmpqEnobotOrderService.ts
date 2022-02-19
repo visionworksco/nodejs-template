@@ -1,4 +1,4 @@
-import { AsyncUtils } from '@visionworksco/expressjs-middleware';
+import { AsyncUtils } from '@visionworksco/nodejs-middleware';
 import { BaseApiCrudService } from '../../../service/BaseApiCrudService';
 import { AmpqCmdExchangeMessageAction } from '../ampqCmdExchange/AmpqCmdExchangeMessageAction';
 import { AmpqCmdExchangeMessageDestination } from '../ampqCmdExchange/AmpqCmdExchangeMessageDestination';
