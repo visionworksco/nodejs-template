@@ -1,6 +1,6 @@
 import { PageResult, Paginator } from '@visionworksco/nodejs-middleware';
 import { HttpError } from 'http-errors';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 import { GapiSearchType } from './GapiSearchType';
 
 export class GapiSearchPageResult extends PageResult<EnobotTimeSerieEntity> {

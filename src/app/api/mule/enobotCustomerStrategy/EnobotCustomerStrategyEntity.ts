@@ -2,8 +2,8 @@
 
 import { Expose } from 'class-transformer';
 import { BaseApiEntity } from '../../../entity/BaseApiEntity';
-import { EnobotDeleted } from '../../../type/EnobotDeleted';
-import { EnobotSide } from '../../../type/EnobotSide';
+import { EnobotDeleted } from '../../types/EnobotDeleted';
+import { EnobotSide } from '../../types/EnobotSide';
 import { EnobotStrategyDataEntity } from '../enobotStrategyData/EnobotStrategyDataEntity';
 import { EnobotCustomerStrategy } from './EnobotCustomerStrategy';
 

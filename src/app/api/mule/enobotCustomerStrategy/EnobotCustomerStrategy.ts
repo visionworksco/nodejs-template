@@ -1,6 +1,6 @@
 import { ApiEntity } from '@visionworksco/nodejs-middleware';
-import { EnobotDeleted } from '../../../type/EnobotDeleted';
-import { EnobotSide } from '../../../type/EnobotSide';
+import { EnobotDeleted } from '../../types/EnobotDeleted';
+import { EnobotSide } from '../../types/EnobotSide';
 import { EnobotStrategyData } from '../enobotStrategyData/EnobotStrategyData';
 
 export interface EnobotCustomerStrategy extends ApiEntity {

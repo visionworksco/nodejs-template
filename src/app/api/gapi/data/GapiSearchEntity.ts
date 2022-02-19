@@ -2,7 +2,7 @@
 
 import { Expose, Type } from 'class-transformer';
 import { BaseApiEntity } from '../../../entity/BaseApiEntity';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 import { GapiSearch } from './GapiSearch';
 import { GapiSearchType } from './GapiSearchType';
 

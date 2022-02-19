@@ -1,6 +1,6 @@
 import { ApiEntity } from '@visionworksco/nodejs-middleware';
-import { EnobotDeleted } from '../../../type/EnobotDeleted';
-import { EnobotLimitType } from '../../../type/EnobotLimitType';
+import { EnobotDeleted } from '../../types/EnobotDeleted';
+import { EnobotLimitType } from '../../types/EnobotLimitType';
 import { EnobotNonFirmRequestInfo } from './EnobotNonFirmRequestInfo';
 import { EnobotNonFirmRequestOrder } from './EnobotNonFirmRequestOrder';
 

@@ -1,4 +1,4 @@
-import { EnobotLimitType } from '../../../type/EnobotLimitType';
+import { EnobotLimitType } from '../../types/EnobotLimitType';
 import { AmpqEnobotOrder } from './AmpqEnobotOrder';
 import { AmpqEnobotOrderLimitInfo } from './AmpqEnobotOrderLimitInfo';
 

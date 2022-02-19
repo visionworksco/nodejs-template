@@ -1,8 +1,8 @@
 import { AmpqCmdExchangeMessageAction } from '../app/api/ampq/ampqCmdExchange/AmpqCmdExchangeMessageAction';
 import { AmpqCmdExchangeMessageDestination } from '../app/api/ampq/ampqCmdExchange/AmpqCmdExchangeMessageDestination';
 import { AmpqEnobotHbExchangeMessageModule } from '../app/api/ampq/ampqEnobotHbExchange/AmpqEnobotHbExchangeMessageModule';
-import { EnobotLimitType } from '../app/type/EnobotLimitType';
-import { EnobotSide } from '../app/type/EnobotSide';
+import { EnobotLimitType } from '../app/api/types/EnobotLimitType';
+import { EnobotSide } from '../app/api/types/EnobotSide';
 import { SwaggerCommon } from './SwaggerCommon';
 import { SwaggerConstants } from './SwaggerConstants';
 

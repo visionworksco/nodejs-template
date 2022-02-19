@@ -3,8 +3,8 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { nanoid } from 'nanoid';
 import { BaseApiEntity } from '../../../entity/BaseApiEntity';
-import { EnobotDeleted } from '../../../type/EnobotDeleted';
-import { EnobotLimitType } from '../../../type/EnobotLimitType';
+import { EnobotDeleted } from '../../types/EnobotDeleted';
+import { EnobotLimitType } from '../../types/EnobotLimitType';
 import { EnobotNonFirmRequest } from './EnobotNonFirmRequest';
 import { EnobotNonFirmRequestInfo } from './EnobotNonFirmRequestInfo';
 import { EnobotNonFirmRequestOrder } from './EnobotNonFirmRequestOrder';

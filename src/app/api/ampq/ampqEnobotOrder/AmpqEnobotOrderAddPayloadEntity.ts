@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { Expose, Type } from 'class-transformer';
-import { EnobotLimitType } from '../../../type/EnobotLimitType';
+import { EnobotLimitType } from '../../types/EnobotLimitType';
 import { AmpqEnobotOrder } from './AmpqEnobotOrder';
 import { AmpqEnobotOrderAddPayload } from './AmpqEnobotOrderAddPayload';
 import { AmpqEnobotOrderLimit } from './AmpqEnobotOrderLimit';

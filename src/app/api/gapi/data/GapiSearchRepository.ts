@@ -5,7 +5,7 @@ import {
   ServerException,
 } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../../class/ClassTransformer';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 
 export class GapiSearchRepository implements Repository<EnobotTimeSerieEntity> {
   async findAll(pageRequest: PageRequest): Promise<PageResult<EnobotTimeSerieEntity>> {

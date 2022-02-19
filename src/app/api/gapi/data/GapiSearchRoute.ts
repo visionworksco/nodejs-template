@@ -1,5 +1,5 @@
 import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 import { GapiSearchController } from './GapiSearchController';
 
 export class GapiSearchRoute extends BaseCrudRoute<EnobotTimeSerieEntity> {

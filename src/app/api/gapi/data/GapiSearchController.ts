@@ -1,7 +1,7 @@
 import { BaseRequest, PageRequest, StatusCode } from '@visionworksco/nodejs-middleware';
 import { Response } from 'express';
 import { BaseApiCrudController } from '../../../controller/BaseApiCrudController';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 import { GapiSearchService } from './GapiSearchService';
 
 export class GapiSearchController extends BaseApiCrudController<EnobotTimeSerieEntity> {

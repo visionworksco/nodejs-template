@@ -1,5 +1,5 @@
 import { ApiEntity } from '@visionworksco/nodejs-middleware';
-import { EnobotTimeSerie } from '../../../type/EnobotTimeSerie';
+import { EnobotTimeSerie } from '../../types/EnobotTimeSerie';
 import { GapiSearchType } from './GapiSearchType';
 
 export interface GapiSearch extends ApiEntity {

@@ -4,7 +4,7 @@ import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
 import { BaseApiCrudService } from '../../../service/BaseApiCrudService';
 import { BaseGapiApi } from '../../../service/BaseGapiApi';
-import { EnobotTimeSerieEntity } from '../../../type/EnobotTimeSerieEntity';
+import { EnobotTimeSerieEntity } from '../../types/EnobotTimeSerieEntity';
 import { GapiSearchEntity } from './GapiSearchEntity';
 import { GapiSearchPageRequestOptions } from './GapiSearchPageRequestOptions';
 import { GapiSearchPageResult } from './GapiSearchPageResult';

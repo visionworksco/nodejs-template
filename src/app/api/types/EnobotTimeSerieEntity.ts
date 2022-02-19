@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { Expose } from 'class-transformer';
-import { BaseApiEntity } from '../entity/BaseApiEntity';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
 import { EnobotTimeSerie } from './EnobotTimeSerie';
 
 export class EnobotTimeSerieEntity extends BaseApiEntity implements EnobotTimeSerie {

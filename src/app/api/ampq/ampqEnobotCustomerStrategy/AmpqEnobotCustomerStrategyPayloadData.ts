@@ -1,5 +1,5 @@
-import { EnobotDeleted } from '../../../type/EnobotDeleted';
-import { EnobotSide } from '../../../type/EnobotSide';
+import { EnobotDeleted } from '../../types/EnobotDeleted';
+import { EnobotSide } from '../../types/EnobotSide';
 
 export class AmpqEnobotCustomerStrategyPayloadData {
   id: string | null = null;

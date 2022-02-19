@@ -1,4 +1,4 @@
-import { EnobotLimitType } from '../app/type/EnobotLimitType';
+import { EnobotLimitType } from '../app/api/types/EnobotLimitType';
 import { SwaggerConstants } from './SwaggerConstants';
 
 const Security = [{ bearerAuth: [] }];
