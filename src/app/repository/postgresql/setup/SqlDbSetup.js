@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-const SettingsDefault = require('../../../api/settings/data/SettingsDefault.json');
 
 const NODE_ENV = process.env.NODE_ENV || 'development.local';
 const envFilePath = './.env.' + NODE_ENV;
@@ -124,7 +123,7 @@ const dbSetup = async () => {
     // settings default values
     const createdAt = new Date().toJSON();
     const createdBy = 'server';
-    const dataJson = SettingsDefault.data;
+    const dataJson = '';
 
     sqlQuery = `
     INSERT INTO settings("createdAt", "createdBy", "data") 

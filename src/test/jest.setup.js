@@ -17,7 +17,7 @@ const setup = () => {
 
   const envParsed = dotenvExpand(env);
   if (envParsed.error) {
-    throw new Error(500, 'Error parsing application environment');
+    throw new Error('Error parsing application environment');
   }
 };
 

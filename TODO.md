@@ -8,3 +8,4 @@ config
 auth
 pm2
 debug
+update tsconfig in other projects

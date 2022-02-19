@@ -19,6 +19,7 @@
     "clean": "rimraf dist && rimraf coverage",
     "commit": "git add . && git commit -m 'feat: :rocket:'",
     "compile": "tsc --noEmit",
+    "compile:diagnostics": "tsc --noEmit --extendedDiagnostics",
     "format": "prettier --write .",
     "lint": "eslint '**/*.{js,ts}' --fix",
     "lint:license": "license-checker --production --json --out licenses.json",
