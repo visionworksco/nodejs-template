@@ -1,5 +1,5 @@
-const ENV_DEV = 'dev';
-const ENV_DEV_LOCAL = 'dev.local';
+const ENV_DEVELOPMENT = 'development';
+const ENV_DEVELOPMENT_LOCAL = 'development.local';
 
 const getFileUploadsPath = (): string => {
   return process.env.FILE_UPLOADS_PATH ?? '/';
@@ -9,21 +9,20 @@ const getApiDocsPaths = (): string => {
   return process.env.FILE_UPLOADS_PATH ?? '/api-docs';
 };
 
-// ENO_ENV is set at the OS level: dev || production
 const getEnv = (): string => {
-  return process.env.ENO_ENV || ENV_DEV_LOCAL;
+  return process.env.NODE_ENV || ENV_DEVELOPMENT_LOCAL;
 };
 
 const getEnvFilePath = (): string => {
-  return './.env_' + getEnv();
+  return './.env.' + getEnv();
 };
 
-const isEnvDevLocal = (): boolean => {
-  return getEnv() === ENV_DEV_LOCAL;
+const isEnvDevelopmentLocal = (): boolean => {
+  return getEnv() === ENV_DEVELOPMENT_LOCAL;
 };
 
-const isEnvDev = (): boolean => {
-  return getEnv() === ENV_DEV;
+const isEnvDevelopment = (): boolean => {
+  return getEnv() === ENV_DEVELOPMENT;
 };
 
 const isMockData = (): boolean => {
@@ -39,8 +38,8 @@ export const EnvironmentUtils = {
   getApiDocsPaths,
   getEnv,
   getEnvFilePath,
-  isEnvDevLocal,
-  isEnvDev,
+  isEnvDevelopmentLocal,
+  isEnvDevelopment,
   isMockData,
   isDebug,
 };

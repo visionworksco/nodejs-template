@@ -60,7 +60,7 @@ export class Server {
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
       this.app.use(Cors());
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development.local') {
         this.app.use(HttpLogger());
       }
       this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));

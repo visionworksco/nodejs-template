@@ -2,14 +2,12 @@ require('reflect-metadata');
 const dotenv = require('dotenv');
 const dotenvExpand = require('dotenv-expand');
 
-const ENV_DEV_LOCAL = 'uat';
-
 const getEnv = () => {
-  return process.env.ENO_ENV || ENV_DEV_LOCAL;
+  return process.env.NODE_ENV || 'test';
 };
 
 const getEnvFilePath = () => {
-  return './.env_' + getEnv();
+  return './.env.' + getEnv();
 };
 
 const setup = () => {

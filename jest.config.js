@@ -12,7 +12,6 @@ module.exports = {
   setupFilesAfterEnv: ['jest-extended/all'], // jest-extended
   runner: 'groups', // jest-runner-groups,
   globals: {
-    ENO_ENV: 'test',
     DEBUG: 'true',
     MOCK_DATA: 'true',
   },

@@ -7,8 +7,8 @@ const connectionOptions = (): Options.Connect => {
   let hostname = '';
 
   if (
-    EnvironmentUtils.isEnvDevLocal() ||
-    (EnvironmentUtils.isEnvDev() && EnvironmentUtils.isDebug())
+    EnvironmentUtils.isEnvDevelopmentLocal() ||
+    (EnvironmentUtils.isEnvDevelopment() && EnvironmentUtils.isDebug())
   ) {
     // start:dev, start:dev:mock, start:stage
     hostname = Config.get('RABBITMQ_HOSTS');

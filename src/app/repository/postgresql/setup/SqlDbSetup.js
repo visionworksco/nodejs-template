@@ -1,8 +1,8 @@
 const { Pool } = require('pg');
 const SettingsDefault = require('../../../api/settings/data/SettingsDefault.json');
 
-const ENO_ENV = process.env.ENO_ENV || 'dev';
-const envFilePath = './.env_' + ENO_ENV;
+const NODE_ENV = process.env.NODE_ENV || 'development.local';
+const envFilePath = './.env.' + NODE_ENV;
 require('dotenv').config({ path: envFilePath });
 
 const psql = (database) => {

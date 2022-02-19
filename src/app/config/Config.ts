@@ -31,7 +31,7 @@ Config
     RabbitMQ: {
       protocol: 'amqps',
       port: 5671,
-      vhost: EnvironmentUtils.isEnvDevLocal() ? 'vxdqrvec' : 'enobot',
+      vhost: EnvironmentUtils.isEnvDevelopmentLocal() ? 'vxdqrvec' : 'enobot',
       heartbeat: 30,
     },
     // TODO: remove MULE_HOST, MULE_USER, MULE_PASS when Thilo add to env file
