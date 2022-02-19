@@ -16,7 +16,6 @@ import express, { Application } from 'express';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
-import { AmpqEnobotHbExchangeService } from '../../api/ampq/ampqEnobotHbExchange/AmpqEnobotHbExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
 import { AmpqServices } from './AmpqServices';
@@ -42,10 +41,7 @@ export class Server {
     this.apiDocsPath = EnvironmentUtils.getApiDocsPaths();
 
     this.storages = new Storages();
-    this.ampqServices = new AmpqServices(
-      new AmpqCmdExchangeService(),
-      new AmpqEnobotHbExchangeService(),
-    );
+    this.ampqServices = new AmpqServices(new AmpqCmdExchangeService());
     this.routes = new Routes(this.app);
 
     try {
