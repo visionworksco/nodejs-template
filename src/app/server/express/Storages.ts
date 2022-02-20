@@ -1,10 +1,14 @@
 import { Storage } from '@visionworksco/nodejs-middleware';
 
-// TODO: refactor to Mongodb + PSQL or MongodbStorages or remove
 export class Storages {
   private storages: Storage[] = [];
 
-  // TODO: not used?
+  constructor(...storages: Storage[]) {
+    for (const storage of storages) {
+      this.register(storage);
+    }
+  }
+
   private register(storage: Storage) {
     this.storages.push(storage);
   }

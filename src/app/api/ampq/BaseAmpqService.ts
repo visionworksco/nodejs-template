@@ -19,7 +19,7 @@ export abstract class BaseAmpqService implements AmpqService {
       await this.ampq.connect();
       await this.ampq.registerExchange(this.exchangeName);
 
-      Logger.log(`${this.name}: connected to ${this.ampq.getInfo()}`);
+      Logger.log(`[${this.name}] connected to ${this.ampq.getInfo()}`);
 
       this.afterStart();
     } catch (error) {
@@ -36,7 +36,7 @@ export abstract class BaseAmpqService implements AmpqService {
 
     this.ampq.disconnect();
 
-    Logger.log(`${this.name}: disconnected`);
+    Logger.log(`[${this.name}] disconnected`);
   }
 
   abstract consume(): Promise<void>;

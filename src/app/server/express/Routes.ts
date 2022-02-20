@@ -1,12 +1,13 @@
 import {
-  PsqlPool,
   RootRoute,
   Route,
   StaticFolderRegister,
+  Storage,
   UndefinedRoute,
 } from '@visionworksco/nodejs-middleware';
 import { Application, Request, Response } from 'express';
 import path from 'path';
+import { Pool } from 'pg';
 import { AccountController } from '../../api/account/AccountController';
 import { AccountRepository } from '../../api/account/AccountRepository';
 import { AccountRoute } from '../../api/account/AccountRoute';
@@ -16,6 +17,7 @@ import { InfoRepository } from '../../api/info/InfoRepository';
 import { InfoRoute } from '../../api/info/InfoRoute';
 import { InfoService } from '../../api/info/InfoService';
 import { Config } from '../../config/Config';
+import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 
 export class Routes {
   private app: Application;
@@ -24,42 +26,52 @@ export class Routes {
   private baseUrl: string;
   private routes: Route[] = [];
 
-  private accountRepository: AccountRepository;
-  private accountService: AccountService;
-  private accountController: AccountController;
-  private accountRoute: AccountRoute;
+  private psqlPool: Pool | null = null;
 
-  private infoRepository: InfoRepository;
-  private infoService: InfoService;
-  private infoController: InfoController;
-  private infoRoute: InfoRoute;
+  private accountRepository: AccountRepository | null = null;
+  private accountService: AccountService | null = null;
+  private accountController: AccountController | null = null;
+  private accountRoute: AccountRoute | null = null;
+
+  private infoRepository: InfoRepository | null = null;
+  private infoService: InfoService | null = null;
+  private infoController: InfoController | null = null;
+  private infoRoute: InfoRoute | null = null;
 
   constructor(app: Application) {
     this.app = app;
     this.apiVersion = Config.get('AppConfig').API_VERSION;
     this.baseUrl = `/${this.apiVersion}/api`;
-
-    // TODO: should it be here?
-    const psqlPool = PsqlPool();
-
-    this.accountRepository = new AccountRepository(psqlPool);
-    this.accountService = new AccountService(this.accountRepository);
-    this.accountController = new AccountController(this.accountService);
-    this.accountRoute = new AccountRoute(this.accountController);
-    this.register(this.accountRoute);
-
-    this.infoRepository = new InfoRepository();
-    this.infoService = new InfoService(this.infoRepository);
-    this.infoController = new InfoController(this.infoService);
-    this.infoRoute = new InfoRoute(this.infoController);
-    this.register(this.infoRoute);
   }
 
-  private register(route: Route): void {
-    this.routes.push(route);
+  async connect(storage: Storage): Promise<void> {
+    try {
+      // PostgreSQL pool object
+      if (storage instanceof PsqlStorage) {
+        this.psqlPool = storage.pool;
+      }
+
+      if (this.psqlPool) {
+        this.accountRepository = new AccountRepository(this.psqlPool);
+        this.accountService = new AccountService(this.accountRepository);
+        this.accountController = new AccountController(this.accountService);
+        this.accountRoute = new AccountRoute(this.accountController);
+        this.register(this.accountRoute);
+      }
+
+      this.infoRepository = new InfoRepository();
+      this.infoService = new InfoService(this.infoRepository);
+      this.infoController = new InfoController(this.infoService);
+      this.infoRoute = new InfoRoute(this.infoController);
+      this.register(this.infoRoute);
+
+      this.afterConnect();
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
-  connect(): void {
+  private afterConnect(): void {
     this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
     this.registerStatusRoute();
     this.registerProductionClientRoute();
@@ -67,13 +79,17 @@ export class Routes {
     this.app.use(UndefinedRoute);
   }
 
-  registerStatusRoute = (): void => {
+  private register(route: Route): void {
+    this.routes.push(route);
+  }
+
+  private registerStatusRoute = (): void => {
     this.app.get('/status', (req: Request, res: Response) => {
       res.contentType('text/html').end('active');
     });
   };
 
-  registerProductionClientRoute = (): void => {
+  private registerProductionClientRoute = (): void => {
     if (process.env.NODE_ENV !== 'production') {
       return;
     }

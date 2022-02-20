@@ -18,6 +18,8 @@ import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
+import { PsqlStorageConnection } from '../../repository/postgresql/PsqlStorageConnection';
 import { AmpqServices } from './AmpqServices';
 import { Routes } from './Routes';
 import { Storages } from './Storages';
@@ -27,6 +29,7 @@ export class Server {
   private port: number;
   private app: Application;
   private storages: Storages;
+  private psqlStorage: PsqlStorage;
   private ampqServices: AmpqServices;
   private routes: Routes;
   private fileUploadsPath: string;
@@ -40,8 +43,11 @@ export class Server {
     this.fileUploadsPath = EnvironmentUtils.getFileUploadsPath();
     this.apiDocsPath = EnvironmentUtils.getApiDocsPaths();
 
-    this.storages = new Storages();
+    this.psqlStorage = new PsqlStorage(new PsqlStorageConnection());
+    this.storages = new Storages(this.psqlStorage);
+
     this.ampqServices = new AmpqServices(new AmpqCmdExchangeService());
+
     this.routes = new Routes(this.app);
 
     try {
@@ -62,8 +68,6 @@ export class Server {
       this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
       this.app.use(this.apiDocsPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
 
-      this.routes.connect();
-
       this.onStop();
 
       this.app.use(ServerExceptionHandler);
@@ -77,15 +81,18 @@ export class Server {
 
   async start(): Promise<void> {
     try {
+      // data storages
+      await this.storages.connect();
+
+      // routes
+      await this.routes.connect(this.psqlStorage);
+
       // Express server
       this.app.listen(this.port, () => {
         Logger.log(
-          `${this.name}: started on port ${this.port} in environment ${EnvironmentUtils.getEnv()}`,
+          `[${this.name}] started on port ${this.port} in environment ${EnvironmentUtils.getEnv()}`,
         );
       });
-
-      // data storages
-      await this.storages.connect();
 
       // RabbitMQ services
       await this.ampqServices.start();
@@ -100,7 +107,7 @@ export class Server {
         await this.storages.disconnect();
         this.ampqServices.stop();
 
-        Logger.log(`${this.name}: stopped`);
+        Logger.log(`[${this.name}] stopped`);
         process.exit(0);
       } catch (error) {
         return Promise.reject(error);

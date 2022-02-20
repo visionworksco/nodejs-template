@@ -1,4 +1,4 @@
-import { Logger, PsqlPool } from '@visionworksco/nodejs-middleware';
+import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
@@ -12,7 +12,7 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
   }
 
   afterStart(): void {
-    const psqlPool = PsqlPool();
+    return;
   }
 
   async consume(): Promise<void> {
@@ -21,7 +21,7 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
         return;
       }
 
-      Logger.log(`${this.name}: waiting for messages from exchange ${this.exchangeName}...`);
+      Logger.log(`[${this.name}] waiting for messages from exchange ${this.exchangeName}...`);
 
       await this.ampq.consume(
         this.exchangeName,
@@ -37,11 +37,11 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
 
           // process only 'cockpit' related messages
           if (messagePayload.to === 'cockpit') {
-            Logger.log('process only "cockpit" related messages');
+            Logger.log('process only "cockpit" related messages...');
           }
 
           if (EnvironmentUtils.isDebug()) {
-            Logger.log(`${this.name}:${this.exchangeName}:${messagePayload.to}:`, messagePayload);
+            Logger.log(`[${this.name}:${this.exchangeName}:${messagePayload.to}]`, messagePayload);
           }
 
           this.ampq.acknowledge(message);
