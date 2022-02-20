@@ -19,7 +19,7 @@ module.exports = {
     'plugin:prettier/recommended', // enables eslint-plugin-prettier and eslint-config-prettier, this will display prettier errors as ESLint errors, make sure this is always the last configuration in the extends array
   ],
   rules: {
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-warning-comments': ['warn', { terms: ['todo', 'fixme'], location: 'anywhere' }],
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
