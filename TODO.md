@@ -8,6 +8,8 @@ config
 auth
 pm2
 debug
-update tsconfig in other projects
+update tsconfig, tsconfig.build in other projects
 replace all require('...')
 replace all .js to .ts
+add 'compile:diagnostics'script to other projects
+update 'test' scripts in other projects with cross-env NODE_ENV=test
