@@ -19,5 +19,8 @@ update 'test' scripts in other projects with cross-env NODE_ENV=test
 update prettier and eslint in other projects
 update nodemon config in other projects
 update .lintstagedrc in other projects
+log application started: app name and version
+rename src/docs -> src/doc
+move setup.js -> setup/Setup.ts
 
 "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
