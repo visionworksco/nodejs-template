@@ -5,12 +5,12 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import { Pool } from 'pg';
+import pg from 'pg';
 
 export class PsqlStorage implements Storage {
   private name: string;
   private connection: DbStorageConnection;
-  private _pool: Pool | null;
+  private _pool: pg.Pool | null;
 
   constructor(connection: DbStorageConnection) {
     this.name = 'PostgreSQL';
@@ -34,13 +34,14 @@ export class PsqlStorage implements Storage {
         password,
       };
 
-      this._pool = new Pool(psqlConfig);
+      this._pool = new pg.Pool(psqlConfig);
 
       this._pool.on('error', (error, client) => {
         throw ServerException.create(StatusCode.INTERNAL_SERVER_ERROR, error.message);
       });
 
-      Logger.log(`[${this.name}] connected to ${this.connection.getInfo()}`);
+      // TODO:
+      // Logger.log(`[${this.name}] connected to ${this.connection.getInfo()}`);
     } catch (error) {
       return Promise.reject(error);
     }

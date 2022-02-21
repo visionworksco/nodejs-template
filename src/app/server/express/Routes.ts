@@ -12,10 +12,6 @@ import { AccountController } from '../../api/account/AccountController';
 import { AccountRepository } from '../../api/account/AccountRepository';
 import { AccountRoute } from '../../api/account/AccountRoute';
 import { AccountService } from '../../api/account/AccountService';
-import { InfoController } from '../../api/info/InfoController';
-import { InfoRepository } from '../../api/info/InfoRepository';
-import { InfoRoute } from '../../api/info/InfoRoute';
-import { InfoService } from '../../api/info/InfoService';
 import { Config } from '../../config/Config';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 
@@ -32,11 +28,6 @@ export class Routes {
   private accountService: AccountService | null = null;
   private accountController: AccountController | null = null;
   private accountRoute: AccountRoute | null = null;
-
-  private infoRepository: InfoRepository | null = null;
-  private infoService: InfoService | null = null;
-  private infoController: InfoController | null = null;
-  private infoRoute: InfoRoute | null = null;
 
   constructor(app: Application) {
     this.app = app;
@@ -58,12 +49,6 @@ export class Routes {
         this.accountRoute = new AccountRoute(this.accountController);
         this.register(this.accountRoute);
       }
-
-      this.infoRepository = new InfoRepository();
-      this.infoService = new InfoService(this.infoRepository);
-      this.infoController = new InfoController(this.infoService);
-      this.infoRoute = new InfoRoute(this.infoController);
-      this.register(this.infoRoute);
 
       this.afterConnect();
     } catch (error) {

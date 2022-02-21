@@ -98,7 +98,9 @@ export class Server {
       // Express server
       this.app.listen(this.port, () => {
         Logger.log(
-          `[${this.name}] started on port ${this.port} in environment ${EnvironmentUtils.getEnv()}`,
+          `[${this.name}] started at http://localhost:${
+            this.port
+          } in environment ${EnvironmentUtils.getEnv()}`,
         );
         // console.log(
         //   chalk.green(

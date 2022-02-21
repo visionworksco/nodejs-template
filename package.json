@@ -14,7 +14,11 @@
     "url": "https://github.com/visionworksco/nodejs-template/issues"
   },
   "main": "src/app/index.ts",
-  "type": "commonjs",
+  "type": "module",
+  "exports": "./dist/app/index.js",
+  "engines": {
+    "node": ">=14.18.3"
+  },
   "scripts": {
     "build": "npm run clean && npm run compile && tsc -p tsconfig.build.json",
     "clean": "rimraf dist && rimraf coverage",
@@ -30,12 +34,13 @@
     "setup:app": "node ./src/app/setup.js",
     "setup:app:dev": "cross-env NODE_ENV=development.local npm run setup:app",
     "start": "npm run start:dev:mock",
-    "start:dev": "cross-env NODE_ENV=development.local DEBUG=true npm run start:watch",
-    "start:dev:mock": "cross-env NODE_ENV=development.local DEBUG=true MOCK_DATA=true npm run start:watch",
-    "start:prod": "node dist/app/index.js",
+    "start:dev": "cross-env NODE_ENV=development.local DEBUG=true npm run start:watch:ts",
+    "start:dev:mock": "cross-env NODE_ENV=development.local DEBUG=true MOCK_DATA=true npm run start:watch:ts",
+    "start:prod": "node ./dist/app/index.js",
     "start:stage": "cross-env NODE_ENV=development DEBUG=true ts-node .",
-    "start:test": "cross-env NODE_ENV=test npm run start:watch",
+    "start:test": "cross-env NODE_ENV=test npm run start:watch:ts",
     "start:watch": "nodemon .",
+    "start:watch:ts": "tsc-watch --onSuccess \"npm run start:watch\"",
     "test": "npm run test:unit",
     "test:all": "npm run test:unit && npm run test:integration",
     "test:coverage": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --coverage",
@@ -106,6 +111,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.1",
     "ts-node": "^9.0.0",
+    "tsc-watch": "^4.6.0",
     "typescript": "4.0.3"
   }
 }

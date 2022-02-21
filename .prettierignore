@@ -177,3 +177,4 @@ src/assets/
 client/build/
 .backup/
 .husky/
+nodemon.json
