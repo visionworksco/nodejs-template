@@ -1,7 +1,7 @@
 import { Options } from 'amqplib';
 import fs from 'fs';
-import { Config } from '../../config/Config';
-import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { Config } from '../config/Config';
+import { EnvironmentUtils } from '../environment/EnvironmentUtils';
 
 const connectionOptions = (): Options.Connect => {
   let hostname = '';

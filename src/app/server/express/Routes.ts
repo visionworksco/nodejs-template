@@ -16,6 +16,7 @@ import { Config } from '../../config/Config';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 
 export class Routes {
+  private name: string;
   private app: Application;
 
   private apiVersion: string;
@@ -30,12 +31,13 @@ export class Routes {
   private accountRoute: AccountRoute | null = null;
 
   constructor(app: Application) {
+    this.name = 'Express.js routes';
     this.app = app;
     this.apiVersion = Config.get('AppConfig').API_VERSION;
     this.baseUrl = `/${this.apiVersion}/api`;
   }
 
-  async connect(storage: Storage): Promise<void> {
+  async register(storage: Storage): Promise<void> {
     try {
       // PostgreSQL pool object
       if (storage instanceof PsqlStorage) {
@@ -47,16 +49,16 @@ export class Routes {
         this.accountService = new AccountService(this.accountRepository);
         this.accountController = new AccountController(this.accountService);
         this.accountRoute = new AccountRoute(this.accountController);
-        this.register(this.accountRoute);
+        this.registerRoute(this.accountRoute);
       }
 
-      this.afterConnect();
+      this.afterRegister();
     } catch (error) {
       return Promise.reject(error);
     }
   }
 
-  private afterConnect(): void {
+  private afterRegister(): void {
     this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
     this.registerStatusRoute();
     this.registerProductionClientRoute();
@@ -64,7 +66,7 @@ export class Routes {
     this.app.use(UndefinedRoute);
   }
 
-  private register(route: Route): void {
+  private registerRoute(route: Route): void {
     this.routes.push(route);
   }
 

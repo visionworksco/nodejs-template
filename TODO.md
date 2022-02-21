@@ -17,4 +17,3 @@ update 'test' scripts in other projects with cross-env NODE_ENV=test
 "type": "commonjs"
 
 "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
-console.log(`🚀 server started at http://localhost:${port}`)

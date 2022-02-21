@@ -1,8 +1,10 @@
 import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
+import chalk from 'chalk';
+import ora from 'ora';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
-import { BaseAmpqService } from '../BaseAmpqService';
+import { BaseAmpqService } from '../../../messageBroker/BaseAmpqService';
 import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeMessageEntity } from './AmpqCmdExchangeMessageEntity';
 
@@ -21,7 +23,10 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
         return;
       }
 
-      Logger.log(`[${this.name}] waiting for messages from exchange ${this.exchangeName}...`);
+      const consoleSpinner = ora();
+      consoleSpinner.info(
+        chalk.blue(`[${this.name}] waiting for messages from exchange ${this.exchangeName}...`),
+      );
 
       await this.ampq.consume(
         this.exchangeName,

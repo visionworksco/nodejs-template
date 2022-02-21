@@ -12,6 +12,7 @@ import {
   StatusCode,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
+import chalk from 'chalk';
 import express, { Application } from 'express';
 import ora from 'ora';
 import swaggerUI from 'swagger-ui-express';
@@ -38,7 +39,7 @@ export class Server {
 
   constructor() {
     this.app = express();
-    this.name = 'Express server';
+    this.name = 'Express.js';
     this.port = Number(process.env.PORT) || 3000;
 
     this.fileUploadsPath = EnvironmentUtils.getFileUploadsPath();
@@ -82,43 +83,30 @@ export class Server {
 
   async start(): Promise<void> {
     try {
-      const spinner = ora({ color: 'green' });
-      spinner.start('Starting application...');
+      const consoleSpinner = ora();
 
-      // data storages
+      // data storage
+      consoleSpinner.start('Connecting data storage...');
       await this.storages.connect();
 
-      spinner.succeed('Conneccted data storages');
-
       // routes
-      await this.routes.connect(this.psqlStorage);
+      await this.routes.register(this.psqlStorage);
 
-      spinner.succeed('Conneccted routes');
-
-      // Express server
+      // server
+      consoleSpinner.start('Starting server...');
       this.app.listen(this.port, () => {
-        Logger.log(
-          `[${this.name}] started at http://localhost:${
-            this.port
-          } in environment ${EnvironmentUtils.getEnv()}`,
+        consoleSpinner.succeed(
+          chalk.green(
+            `[${this.name}] started at http://localhost:${
+              this.port
+            } in environment ${EnvironmentUtils.getEnv()}`,
+          ),
         );
-        // console.log(
-        //   chalk.green(
-        //     `[${this.name}] started on port ${
-        //       this.port
-        //     } in environment ${EnvironmentUtils.getEnv()}`,
-        //   ),
-        // );
       });
 
-      spinner.succeed('Started Express server');
-
-      // RabbitMQ services
+      // message broker
+      consoleSpinner.start('Starting message broker...');
       await this.ampqServices.start();
-
-      spinner.succeed('Started RabbitMQ services');
-
-      spinner.stop();
     } catch (error) {
       return Promise.reject(error);
     }
