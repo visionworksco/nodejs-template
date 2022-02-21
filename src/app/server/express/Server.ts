@@ -12,8 +12,8 @@ import {
   StatusCode,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
 import express, { Application } from 'express';
+import ora from 'ora';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
@@ -82,28 +82,41 @@ export class Server {
 
   async start(): Promise<void> {
     try {
+      const spinner = ora({ color: 'green' });
+      spinner.start('Starting application...');
+
       // data storages
       await this.storages.connect();
+
+      spinner.succeed('Conneccted data storages');
 
       // routes
       await this.routes.connect(this.psqlStorage);
 
+      spinner.succeed('Conneccted routes');
+
       // Express server
       this.app.listen(this.port, () => {
-        // Logger.log(
-        //   `[${this.name}] started on port ${this.port} in environment ${EnvironmentUtils.getEnv()}`,
-        // );
-        console.log(
-          chalk.green(
-            `[${this.name}] started on port ${
-              this.port
-            } in environment ${EnvironmentUtils.getEnv()}`,
-          ),
+        Logger.log(
+          `[${this.name}] started on port ${this.port} in environment ${EnvironmentUtils.getEnv()}`,
         );
+        // console.log(
+        //   chalk.green(
+        //     `[${this.name}] started on port ${
+        //       this.port
+        //     } in environment ${EnvironmentUtils.getEnv()}`,
+        //   ),
+        // );
       });
+
+      spinner.succeed('Started Express server');
 
       // RabbitMQ services
       await this.ampqServices.start();
+
+      spinner.succeed('Started RabbitMQ services');
+
+      spinner.stop();
     } catch (error) {
       return Promise.reject(error);
     }

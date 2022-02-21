@@ -14,6 +14,7 @@
     "url": "https://github.com/visionworksco/nodejs-template/issues"
   },
   "main": "src/app/index.ts",
+  "type": "commonjs",
   "scripts": {
     "build": "npm run clean && npm run compile && tsc -p tsconfig.build.json",
     "clean": "rimraf dist && rimraf coverage",
@@ -34,7 +35,7 @@
     "start:prod": "node dist/app/index.js",
     "start:stage": "cross-env NODE_ENV=development DEBUG=true ts-node .",
     "start:test": "cross-env NODE_ENV=test npm run start:watch",
-    "start:watch": "nodemon --watch 'src/**/*.{js,ts}' --ignore 'src/**/*.test.{js,ts}' --ext 'js,ts' --exec 'ts-node' .",
+    "start:watch": "nodemon .",
     "test": "npm run test:unit",
     "test:all": "npm run test:unit && npm run test:integration",
     "test:coverage": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --coverage",
@@ -62,6 +63,7 @@
     "moment": "^2.29.1",
     "nanoid": "^3.1.28",
     "nconf": "^0.11.3",
+    "ora": "^6.0.1",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.1.6",

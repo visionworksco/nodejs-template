@@ -4,13 +4,13 @@
     "incremental": true,
 
     /* Language and Environment */
-    "target": "es2020",
+    "target": "ESNext",
     "lib": ["es2020"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
     /* Modules */
-    "module": "commonjs",
+    "module": "CommonJS",
     "rootDir": "src",
     "moduleResolution": "node",
     "typeRoots": ["./types", "./node_modules/@types"],
