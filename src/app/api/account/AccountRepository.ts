@@ -1,12 +1,12 @@
 import { PageRequest, PageResult, ServerException } from '@visionworksco/nodejs-middleware';
 import { Pool } from 'pg';
 import { BaseApiPsqlRepository } from '../../repository/postgresql/BaseApiPsqlRepository';
-import { SqlTable } from '../../repository/postgresql/SqlTable';
+import { PsqlTable } from '../../repository/postgresql/PsqlTable';
 import { AccountEntity } from './AccountEntity';
 
 export class AccountRepository extends BaseApiPsqlRepository<AccountEntity> {
   constructor(psql: Pool) {
-    super(psql, SqlTable.ACCOUNT, AccountEntity);
+    super(psql, PsqlTable.ACCOUNT, AccountEntity);
   }
 
   async findAll(pageRequest: PageRequest): Promise<PageResult<AccountEntity>> {

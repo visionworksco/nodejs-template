@@ -10,42 +10,54 @@ import ora from 'ora';
 import pg from 'pg';
 
 export class PsqlStorage implements Storage {
-  private name: string;
+  private _name: string;
   private connection: DbStorageConnection;
-  private _pool: pg.Pool | null;
+  private pool: pg.Pool | null;
 
   constructor(connection: DbStorageConnection) {
-    this.name = 'PostgreSQL';
+    this._name = 'PostgreSQL';
     this.connection = connection;
-    this._pool = null;
+    this.pool = null;
   }
 
-  get pool() {
-    return this._pool;
+  get psql() {
+    return this.pool;
   }
 
-  async connect(): Promise<void> {
+  get name() {
+    return this._name;
+  }
+
+  async connect(): Promise<pg.Pool> {
     try {
-      const { host, database, port, user, password } = this.connection;
+      const { host, port, database, user, password } = this.connection;
 
       const psqlConfig = {
         host,
-        database,
         port,
+        database,
         user,
         password,
       };
 
-      this._pool = new pg.Pool(psqlConfig);
+      this.pool = new pg.Pool(psqlConfig);
+      if (!this.pool) {
+        throw ServerException.create(
+          StatusCode.INTERNAL_SERVER_ERROR,
+          `Error connecting to ${this._name}`,
+        );
+      }
 
-      this._pool.on('error', (error, client) => {
+      this.pool.on('error', (error, client) => {
         throw ServerException.create(StatusCode.INTERNAL_SERVER_ERROR, error.message);
       });
 
       const consoleSpinner = ora();
       consoleSpinner.succeed(
-        chalk.green(`[${this.name}] connected to ${this.connection.getInfo()}`),
+        chalk.green(`[${this._name}] connected to ${this.connection.getInfo()}`),
       );
+
+      return Promise.resolve(this.pool);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -53,12 +65,12 @@ export class PsqlStorage implements Storage {
 
   async disconnect(): Promise<void> {
     try {
-      if (!this._pool) {
+      if (!this.pool) {
         return;
       }
 
-      await this._pool.end();
-      Logger.log(`[${this.name}] disconnected`);
+      await this.pool.end();
+      Logger.log(`[${this._name}] disconnected`);
     } catch (error) {
       Promise.reject(error);
     }

@@ -41,7 +41,7 @@ export class Routes {
     try {
       // PostgreSQL pool object
       if (storage instanceof PsqlStorage) {
-        this.psqlPool = storage.pool;
+        this.psqlPool = storage.psql;
       }
 
       if (this.psqlPool) {
