@@ -43,11 +43,11 @@
     "start:watch:ts": "tsc-watch --onSuccess \"npm run start:watch\"",
     "test": "npm run test:unit",
     "test:all": "npm run test:unit && npm run test:integration",
-    "test:coverage": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --coverage",
-    "test:dev": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit --watch",
-    "test:integration": "cross-env NODE_ENV=test jest --config jest.config.integration.js --group=integration",
-    "test:staged": "cross-env NODE_ENV=test jest --config jest.config.integration.js --onlyChanged",
-    "test:unit": "cross-env NODE_ENV=test jest --config jest.config.js --group=unit"
+    "test:coverage": "jest --group=unit --coverage",
+    "test:dev": "jest --group=unit --watch",
+    "test:integration": "jest --group=integration",
+    "test:staged": "jest --onlyChanged",
+    "test:unit": "jest --group=unit"
   },
   "keywords": [
     "visionworks"
