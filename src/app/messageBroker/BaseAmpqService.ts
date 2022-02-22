@@ -1,8 +1,8 @@
 import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
+import chalk from 'chalk';
+import ora from 'ora';
 import { AmpqExchangeName } from '../api/ampq/AmpqExchangeName';
 import { AmpqConfig } from './AmpqConfig';
-// const chalk = require('chalk');
-// const ora = require('ora');
 
 export abstract class BaseAmpqService implements AmpqService {
   protected name: string;
@@ -21,8 +21,8 @@ export abstract class BaseAmpqService implements AmpqService {
       await this.ampq.connect();
       await this.ampq.registerExchange(this.exchangeName);
 
-      // const consoleSpinner = ora();
-      // consoleSpinner.succeed(chalk.green(`[${this.name}] connected to ${this.ampq.getInfo()}`));
+      const consoleSpinner = ora();
+      consoleSpinner.succeed(chalk.green(`[${this.name}] connected to ${this.ampq.getInfo()}`));
 
       this.afterStart();
     } catch (error) {

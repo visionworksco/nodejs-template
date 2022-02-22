@@ -5,9 +5,9 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
+import chalk from 'chalk';
+import ora from 'ora';
 import pg from 'pg';
-const chalk = require('chalk');
-const ora = require('ora');
 
 export class PsqlStorage implements Storage {
   private name: string;

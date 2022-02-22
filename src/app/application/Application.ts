@@ -1,9 +1,9 @@
 import { ExceptionHandler } from '@visionworksco/nodejs-middleware';
+import chalk from 'chalk';
+import ora from 'ora';
 import 'reflect-metadata';
 import { Environment } from '../environment/Environment';
 import { Server } from '../server/express/Server';
-const chalk = require('chalk');
-const ora = require('ora');
 
 export class Application {
   private name: string;

@@ -1,12 +1,12 @@
 import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
+import chalk from 'chalk';
+import ora from 'ora';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
 import { BaseAmpqService } from '../../../messageBroker/BaseAmpqService';
 import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeMessageEntity } from './AmpqCmdExchangeMessageEntity';
-const chalk = require('chalk');
-const ora = require('ora');
 
 export class AmpqCmdExchangeService extends BaseAmpqService {
   constructor() {

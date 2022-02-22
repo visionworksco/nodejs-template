@@ -6,7 +6,7 @@ const getFileUploadsPath = (): string => {
 };
 
 const getApiDocsPaths = (): string => {
-  return process.env.FILE_UPLOADS_PATH ?? '/api-docs';
+  return process.env.API_DOC_PATH ?? '/api-doc';
 };
 
 const getEnv = (): string => {
