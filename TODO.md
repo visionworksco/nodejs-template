@@ -18,3 +18,10 @@ update nodemon config in other projects
 update .lintstagedrc in other projects
 log application started: app name and version
 rename src/docs -> src/doc
+
+---
+
+import { readFileSync } from 'fs'
+const metaData = JSON.parse(readFileSync('./package.json', 'utf8'))
+
+Another important change is that you can no longer use the **filename and **dirname variables. Instead, ES modules have access to import.meta.url

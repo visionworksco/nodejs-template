@@ -14,6 +14,7 @@
     "url": "https://github.com/visionworksco/nodejs-template/issues"
   },
   "main": "src/app/index.ts",
+  "type": "module",
   "exports": "./dist/app/index.js",
   "engines": {
     "node": ">=14.18.3"

@@ -4,13 +4,13 @@
     "incremental": true,
 
     /* Language and Environment */
-    "target": "ESNext",
+    "target": "esnext",
     "lib": ["es2020"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
     /* Modules */
-    "module": "CommonJS",
+    "module": "esnext",
     "rootDir": "src",
     "moduleResolution": "node",
     "typeRoots": ["./types", "./node_modules/@types"],
@@ -39,6 +39,6 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "files": ["types/global.d.ts"]
 }
