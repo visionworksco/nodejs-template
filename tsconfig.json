@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
 
     /* Modules */
-    "module": "ESNext",
+    "module": "CommonJS",
     "rootDir": "src",
     "moduleResolution": "node",
     "typeRoots": ["./types", "./node_modules/@types"],

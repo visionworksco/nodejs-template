@@ -9,18 +9,12 @@ auth
 pm2
 debug
 update tsconfig, tsconfig.build in other projects
-remove all require('...')
-remove all module.exports = {}
 replace all .js to .ts
 add 'compile:diagnostics'script to other projects
 update 'test' scripts in other projects with cross-env NODE_ENV=test
-.npmrc + package.json's "engines"
-"type": "commonjs"
+.npmrc + package.json's "engines" in other projects
 update prettier and eslint in other projects
 update nodemon config in other projects
 update .lintstagedrc in other projects
 log application started: app name and version
 rename src/docs -> src/doc
-move setup.js -> setup/Setup.ts
-
-"lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",

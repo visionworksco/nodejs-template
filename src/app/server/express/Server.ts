@@ -12,9 +12,7 @@ import {
   StatusCode,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
 import express, { Application } from 'express';
-import ora from 'ora';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
@@ -25,6 +23,8 @@ import { PsqlStorageConnection } from '../../repository/postgresql/PsqlStorageCo
 import { AmpqServices } from './AmpqServices';
 import { Routes } from './Routes';
 import { Storages } from './Storages';
+const chalk = require('chalk');
+const ora = require('ora');
 
 export class Server {
   private name: string;
