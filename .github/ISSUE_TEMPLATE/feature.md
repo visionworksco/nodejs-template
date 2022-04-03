@@ -1,15 +1,7 @@
 ---
 name: Feature
-about: Suggest an idea for this project
+about: Issue template for features
 title: '[FEATURE]'
-labels: Epic
+labels: feature
 assignees: ''
 ---
-
-### :brain: Feature
-
-- What is the new feature / functionality being added?
-- What is the motivation for the new feature?
-- What does this help solve / enable?
-
-**Note** _PRODUCT OWNER, PLEASE ATTACH A SEVERITY LABEL TO EACH FEATURE_
