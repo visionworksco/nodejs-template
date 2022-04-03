@@ -1,6 +1,5 @@
 import { BaseCrudRoute } from '@visionworksco/nodejs-middleware';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { AccountController } from './AccountController';
 import { AccountEntity } from './AccountEntity';
 
@@ -17,10 +16,7 @@ export class AccountRoute extends BaseCrudRoute<AccountEntity> {
     return '/accounts';
   }
 
-  protected allMutateHandlers = (handlerId?: string): RequestHandler[] => [
-    Authenticate(),
-    this.allMutate,
-  ];
+  protected allMutateHandlers = (handlerId?: string): RequestHandler[] => [this.allMutate];
 
   private registerCustomRoutes() {
     this.router.get(`${this.getBaseUrl()}/email/:email`, [this.findByEmail]);

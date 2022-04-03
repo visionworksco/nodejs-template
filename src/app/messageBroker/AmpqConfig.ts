@@ -1,27 +1,16 @@
 import { Options } from 'amqplib';
 import fs from 'fs';
 import { Config } from '../config/Config';
-import { EnvironmentUtils } from '../environment/EnvironmentUtils';
 
 const connectionOptions = (): Options.Connect => {
-  let hostname = '';
-
-  if (
-    EnvironmentUtils.isEnvDevelopmentLocal() ||
-    (EnvironmentUtils.isEnvDevelopment() && EnvironmentUtils.isDebug())
-  ) {
-    // start:dev, start:dev:mock, start:stage
-    hostname = Config.get('RABBITMQ_HOSTS');
-  } else {
-    // TODO: get a hardcoded value as the value from .env_dev or .env_production file is not working due to a DevOps issue
-    hostname = 'rmq01.dev.enocloud.eu';
-  }
-
   return {
-    ...Config.get('RabbitMQ'),
-    hostname,
-    username: Config.get('RABBITMQ_USER'),
-    password: Config.get('RABBITMQ_PASS'),
+    protocol: 'amqps',
+    hostname: Config.get('RABBITMQ_HOSTNAME'),
+    port: 5671,
+    vhost: Config.get('RABBITMQ_VHOST'),
+    username: Config.get('RABBITMQ_USERNAME'),
+    password: Config.get('RABBITMQ_PASSWORD'),
+    heartbeat: 30,
   };
 };
 
