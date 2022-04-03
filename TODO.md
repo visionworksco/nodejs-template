@@ -1,4 +1,3 @@
-postgresql
 mongodb
 rabbitmq
 swagger
@@ -16,6 +15,8 @@ update .lintstagedrc in other projects
 log application started: app name and version
 rename src/docs -> src/doc
 find all missing process.env. env's
+github templates
+refresh token
 
 ---
 

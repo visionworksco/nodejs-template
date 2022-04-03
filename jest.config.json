@@ -1,10 +1,10 @@
 {
   "preset": "ts-jest",
   "roots": ["<rootDir>/src"],
-  "extensionsToTreatAsEsm": [".ts"],
-  "transform": { "^.+\\.tsx?$": "ts-jest" },
+  "transform": { "^.+\\.(ts|tsx|js|jsx)?$": "ts-jest" },
   "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "modulePathIgnorePatterns": ["<rootDir>/src/test/jest.setup.ts"],
   "verbose": true,
   "errorOnDeprecated": true,
   "collectCoverageFrom": ["<rootDir>/src/app/**/*.{js,ts}"],
@@ -12,6 +12,7 @@
   "setupFilesAfterEnv": ["jest-extended/all"],
   "runner": "groups",
   "testEnvironment": "node",
+  "extensionsToTreatAsEsm": [".ts"],
   "globals": {
     "ts-jest": { "useESM": true },
     "NODE_OPTIONS": "--experimental-vm-modules",

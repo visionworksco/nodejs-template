@@ -30,6 +30,7 @@
     "lint:license": "license-checker --production --json --out licenses.json",
     "lint:node_modules": "./nm-lint.sh",
     "lint:staged": "lint-staged",
+    "postbuild": "rimraf tsconfig.tsbuildinfo && rimraf tsconfig.build.tsbuildinfo",
     "postinstall": "husky install",
     "runner:ts:esm": "node --experimental-specifier-resolution=node --loader ts-node/esm",
     "setup:app": "npm run runner:ts:esm ./src/app/setup/Setup.ts",
