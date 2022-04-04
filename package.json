@@ -52,7 +52,7 @@
     "test:watch": "jest --group=unit --watch"
   },
   "dependencies": {
-    "@visionworksco/nodejs-middleware": "^2.1.0",
+    "@visionworksco/nodejs-middleware": "^2.1.3",
     "amqplib": "^0.8.0",
     "axios": "^0.21.1",
     "chalk": "^5.0.0",
