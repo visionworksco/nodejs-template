@@ -12,6 +12,10 @@ import { AccountController } from '../../api/account/AccountController';
 import { AccountRepository } from '../../api/account/AccountRepository';
 import { AccountRoute } from '../../api/account/AccountRoute';
 import { AccountService } from '../../api/account/AccountService';
+import { ProductMongoDbRepository } from '../../api/product/mongodb/ProductMongoDbRepository';
+import { ProductController } from '../../api/product/ProductController';
+import { ProductRoute } from '../../api/product/ProductRoute';
+import { ProductService } from '../../api/product/ProductService';
 import { Config } from '../../config/Config';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 
@@ -29,6 +33,11 @@ export class Routes {
   private accountService: AccountService | null = null;
   private accountController: AccountController | null = null;
   private accountRoute: AccountRoute | null = null;
+
+  private productRepository: ProductMongoDbRepository | null = null;
+  private productService: ProductService | null = null;
+  private productController: ProductController | null = null;
+  private productRoute: ProductRoute | null = null;
 
   constructor(app: Application) {
     this.name = 'Express.js routes';
@@ -51,6 +60,12 @@ export class Routes {
         this.accountRoute = new AccountRoute(this.accountController);
         this.registerRoute(this.accountRoute);
       }
+
+      this.productRepository = new ProductMongoDbRepository();
+      this.productService = new ProductService(this.productRepository);
+      this.productController = new ProductController(this.productService);
+      this.productRoute = new ProductRoute(this.productController);
+      this.registerRoute(this.productRoute);
 
       this.afterRegister();
     } catch (error) {

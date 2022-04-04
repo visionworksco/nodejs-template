@@ -1,6 +1,7 @@
 import { ServerException, StatusCode } from '@visionworksco/nodejs-middleware';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import { cleanEnv, str } from 'envalid';
 import { EnvironmentUtils } from './EnvironmentUtils';
 
 export class Environment {
@@ -16,5 +17,15 @@ export class Environment {
         'Error parsing application environment',
       );
     }
+
+    if (envParsed.parsed) {
+      this.validate();
+    }
+  }
+
+  private validate(): void {
+    cleanEnv(process.env, {
+      APP_NAME: str(),
+    });
   }
 }

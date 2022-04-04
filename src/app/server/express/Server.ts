@@ -10,6 +10,7 @@ import {
   ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
+  Storage,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
 import chalk from 'chalk';
@@ -20,6 +21,8 @@ import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
+import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 import { PsqlStorageConnection } from '../../repository/postgresql/PsqlStorageConnection';
 import { AmpqServices } from './AmpqServices';
@@ -31,7 +34,8 @@ export class Server {
   private port: number;
   private app: Application;
   private storages: Storages;
-  private psqlStorage: PsqlStorage;
+  private psqlStorage: Storage;
+  private mongoDbStorage: Storage;
   private ampqServices: AmpqServices;
   private routes: Routes;
   private fileUploadsPath: string;
@@ -46,7 +50,8 @@ export class Server {
     this.apiDocsPath = EnvironmentUtils.getApiDocsPaths();
 
     this.psqlStorage = new PsqlStorage(new PsqlStorageConnection());
-    this.storages = new Storages(this.psqlStorage);
+    this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
+    this.storages = new Storages(this.psqlStorage, this.mongoDbStorage);
 
     this.ampqServices = new AmpqServices(new AmpqCmdExchangeService());
 
