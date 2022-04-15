@@ -1,0 +1,81 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/products
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+@contentTypeFormData = multipart/form-data
+@entityId = 60093693036ea445afeb50e5
+@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDA5MzY5MzAzNmVhNDQ1YWZlYjUwZTIiLCJpYXQiOjE2MTEyMTc0ODEsImV4cCI6MTYxMTI0NjI4MX0.VQ58pCB6omWgLYe-H88lBxZWaL0M3vGelV9Sy_d7xOk
+### head
+HEAD {{url}} {{protocol}}
+
+### head
+HEAD {{url}}/{{entityId}} {{protocol}}
+
+### options
+OPTIONS {{url}} {{protocol}}
+
+### options
+OPTIONS {{url}}/{{entityId}} {{protocol}}
+
+### findAll
+GET {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### findAll with params
+GET {{url}}?keyword=phone {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### findAll with a paginator
+GET {{url}}?page=1&pageLimit=2 {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### findAll top 3 rated
+GET {{url}}?sort=-rating&pageLimit=3 {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### findById
+GET {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### save
+POST {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+# Cookie: {{authCookie}}
+Authorization: {{authHeader}}
+
+{
+    "name": "Test Product",
+    "image": "/assets/images/airpods.jpg",
+    "description": "test description...",
+    "brand": "Apple",
+    "category": "Electronics",
+    "price": 109.99,
+    "countInStock": 12,
+    "rating": 4.8,
+    "numReviews": 17,
+    "user": "5f9a9744e07c97391c49c656"
+}
+
+### updateById
+PATCH {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+# Cookie: {{authCookie}}
+# Authorization: {{authHeader}}
+
+{
+  "description": ""
+}
+
+### deleteById
+DELETE {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+# Cookie: {{authCookie}}
+Authorization: {{authHeader}}
+
+### upload image
+POST {{url}}/upload?field=image&imageFileType=true {{protocol}}
+Content-Type: {{contentTypeFormData}}
