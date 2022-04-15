@@ -1,4 +1,3 @@
-import { EnobotLimitType } from '../app/api/types/EnobotLimitType';
 import { SwaggerConstants } from './SwaggerConstants';
 
 const Security = [{ bearerAuth: [] }];
@@ -200,7 +199,7 @@ const Settings = {
                 type: 'string',
               },
               description: 'Limit type',
-              example: ['MaxPrice', 'MinPrice'] as EnobotLimitType[],
+              example: ['MaxPrice', 'MinPrice'],
             },
           },
         },

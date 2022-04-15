@@ -1,3 +1,6 @@
 import { Role } from '@visionworksco/nodejs-middleware';
+import { ProductPermission } from '../api/product/ProductPermission';
 
-export type ApiRole = Role;
+export interface ApiRole extends Role {
+  product: ProductPermission;
+}

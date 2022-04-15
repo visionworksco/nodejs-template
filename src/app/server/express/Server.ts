@@ -11,6 +11,7 @@ import {
   StaticFolderRegister,
   StatusCode,
   Storage,
+  Storages,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
 import chalk from 'chalk';
@@ -21,13 +22,12 @@ import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { AmpqServices } from '../../messageBroker/AmpqServices';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 import { PsqlStorageConnection } from '../../repository/postgresql/PsqlStorageConnection';
-import { AmpqServices } from './AmpqServices';
 import { Routes } from './Routes';
-import { Storages } from './Storages';
 
 export class Server {
   private name: string;

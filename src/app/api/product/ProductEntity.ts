@@ -1,6 +1,9 @@
-import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { MongoDbUtils } from '@visionworksco/nodejs-middleware';
+import { Expose, Transform, Type } from 'class-transformer';
+import { IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { ObjectId } from 'mongodb';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { UserEntity } from '../user/UserEntity';
 import { Product } from './Product';
 
 export class ProductEntity extends BaseApiEntity implements Product {
@@ -8,6 +11,11 @@ export class ProductEntity extends BaseApiEntity implements Product {
   @IsString()
   @IsNotEmpty()
   name = '';
+
+  @Expose()
+  @IsString()
+  @IsNotEmpty()
+  image = '';
 
   @Expose()
   @IsString()
@@ -28,4 +36,42 @@ export class ProductEntity extends BaseApiEntity implements Product {
   @IsNumber()
   @IsNotEmpty()
   price = 0.0;
+
+  @Expose()
+  @IsNumber()
+  @IsNotEmpty()
+  countInStock = 0;
+
+  @Expose()
+  @IsNumber()
+  @IsNotEmpty()
+  rating = 0.0;
+
+  @Expose()
+  @IsNumber()
+  @IsNotEmpty()
+  numReviews = 0;
+
+  @Expose()
+  @Type(() => ObjectId)
+  @Transform(MongoDbUtils.toObjectId('user'), { toClassOnly: true })
+  @IsMongoId()
+  @IsNotEmpty()
+  user: UserEntity | string = ''; // reference: Product MANY_TO_ONE User
+
+  @Expose()
+  @Type(() => ObjectId)
+  @Transform(MongoDbUtils.toArrayObjectId('reviews'), { toClassOnly: true })
+  @IsOptional()
+  @IsMongoId()
+  @IsNotEmpty()
+  reviews?: string[]; // reference: Product MANY_TO_ONE Review
+
+  constructor() {
+    super();
+  }
+
+  getPrimaryKeys(): string[] {
+    return [];
+  }
 }
