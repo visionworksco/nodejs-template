@@ -6,7 +6,7 @@ auth
 debug
 log application started: app name and version
 rename src/docs -> src/doc
-find all missing process.env. env's
+find all missing process.env. var's
 
 ---
 

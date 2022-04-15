@@ -1,0 +1,50 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/auth
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### signUp as admin
+POST {{url}}/signUp {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"name": "admin",
+"email": "admin@company.com",
+"password": "123456",
+"roles": ["ADMIN", "AUTHOR", "EDITOR"]
+}
+
+### signIn as admin
+POST {{url}}/signIn {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"email": "admin@company.com",
+"password": "123456"
+}
+
+### signUp as user
+POST {{url}}/signUp {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"name": "user1",
+"email": "user1@company.com",
+"password": "123456",
+"roles": ["AUTHOR", "EDITOR"]
+}
+
+### signIn as user
+POST {{url}}/signIn {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"email": "user2@company.com",
+"password": "123456"
+}
+
+### signOut
+GET {{url}}/signOut {{protocol}}
+Content-Type: {{contentTypeJson}}

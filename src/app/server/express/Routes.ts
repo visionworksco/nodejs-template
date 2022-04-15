@@ -20,7 +20,6 @@ import { Config } from '../../config/Config';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
 
 export class Routes {
-  private name: string;
   private app: Application;
 
   private apiVersion: string;
@@ -40,7 +39,6 @@ export class Routes {
   private productRoute: ProductRoute | null = null;
 
   constructor(app: Application) {
-    this.name = 'Express.js routes';
     this.app = app;
     this.apiVersion = Config.get('AppConfig').API_VERSION;
     this.baseUrl = `/${this.apiVersion}/api`;
