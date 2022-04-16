@@ -2,7 +2,7 @@
 
 import { DateUtils } from '@visionworksco/nodejs-middleware';
 import { Expose } from 'class-transformer';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeMessageAction } from './AmpqCmdExchangeMessageAction';
 import { AmpqCmdExchangeMessageDestination } from './AmpqCmdExchangeMessageDestination';
@@ -35,7 +35,7 @@ export class AmpqCmdExchangeMessageEntity implements AmpqCmdExchangeMessage {
     action: AmpqCmdExchangeMessageAction,
     args: string | null,
   ) {
-    this.id = uuidv4();
+    this.id = nanoid();
     this.timestamp = DateUtils.toISOString(new Date());
     this.to = to;
     this.from = from;

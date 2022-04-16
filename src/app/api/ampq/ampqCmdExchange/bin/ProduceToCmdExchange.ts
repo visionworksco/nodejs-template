@@ -1,6 +1,6 @@
 import { AsyncUtils, DateUtils, Logger } from '@visionworksco/nodejs-middleware';
+import { nanoid } from 'nanoid';
 import 'reflect-metadata';
-import { v4 as uuidv4 } from 'uuid';
 import { Config } from '../../../../config/Config';
 import { AmpqCmdExchangeMessage } from '../AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeService } from '../AmpqCmdExchangeService';
@@ -13,7 +13,7 @@ const produce = async (): Promise<void> => {
     }
 
     const messageValid: AmpqCmdExchangeMessage = {
-      id: uuidv4(),
+      id: nanoid(),
       timestamp: DateUtils.toISOString(new Date()),
       to: 'stromtanke',
       from: 'cockpit',
