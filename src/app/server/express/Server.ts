@@ -14,9 +14,7 @@ import {
   Storages,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
 import express, { Application } from 'express';
-import ora from 'ora';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
@@ -88,29 +86,25 @@ export class Server {
 
   async start(): Promise<void> {
     try {
-      const consoleSpinner = ora();
-
       // data storage
-      consoleSpinner.start('Connecting data storage...');
+      Logger.log(`[${this.name}] connecting data storage...`);
       await this.storages.connect();
 
       // routes
       await this.routes.register(this.psqlStorage);
 
       // server
-      consoleSpinner.start('Starting server...');
+      Logger.log(`[${this.name}] starting server...`);
       this.app.listen(this.port, () => {
-        consoleSpinner.succeed(
-          chalk.green(
-            `[${this.name}] started at http://localhost:${
-              this.port
-            } in environment ${EnvironmentUtils.getEnv()}`,
-          ),
+        Logger.log(
+          `[${this.name}] started at http://localhost:${
+            this.port
+          } in environment ${EnvironmentUtils.getEnv()}`,
         );
       });
 
       // message broker
-      consoleSpinner.start('Starting message broker...');
+      Logger.log(`[${this.name}] starting message broker...`);
       await this.ampqServices.start();
     } catch (error) {
       return Promise.reject(error);

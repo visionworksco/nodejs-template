@@ -5,8 +5,6 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
-import ora from 'ora';
 import pg from 'pg';
 
 export class PsqlStorage implements Storage {
@@ -52,10 +50,7 @@ export class PsqlStorage implements Storage {
         throw ServerException.create(StatusCode.INTERNAL_SERVER_ERROR, error.message);
       });
 
-      const consoleSpinner = ora();
-      consoleSpinner.succeed(
-        chalk.green(`[${this._name}] connected to ${this.connection.getInfo()}`),
-      );
+      Logger.log(`[${this._name}] connected to ${this.connection.getInfo()}`);
 
       return Promise.resolve(this.pool);
     } catch (error) {

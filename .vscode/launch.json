@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "debug nodejs ts",
+      "name": "debug nodejs",
       "skipFiles": ["<node_internals>/**"],
       "env": {
         "NODE_ENV": "development.local",
@@ -13,36 +13,7 @@
       },
       "envFile": "${workspaceFolder}/.env.development.local",
       "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
-      "preLaunchTask": "tsc: build - tsconfig.json",
       "program": "${workspaceFolder}/src/app/index.ts"
-    },
-    {
-      "type": "node",
-      "name": "debug current unit tests",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
-      },
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "disableOptimisticBPs": true,
-      "cwd": "${workspaceFolder}",
-      "args": ["${fileBasenameNoExtension}", "--group=unit"]
-    },
-    {
-      "type": "node",
-      "name": "debug current integration tests",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
-      },
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "disableOptimisticBPs": true,
-      "cwd": "${workspaceFolder}",
-      "args": ["${fileBasenameNoExtension}", "--group=integration"]
     }
   ]
 }

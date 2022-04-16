@@ -5,12 +5,14 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 export class MongoDbStorage implements Storage {
+  private name: string;
   private connection: DbStorageConnection;
 
   constructor(connection: DbStorageConnection) {
+    this.name = 'MongoDB';
     this.connection = connection;
   }
 
@@ -21,18 +23,18 @@ export class MongoDbStorage implements Storage {
       }
 
       mongoose.connection.on('connected', () => {
-        Logger.log(`${this.connection.getInfo()}: connected`);
+        Logger.log(`[${this.name}] connected to ${this.connection.getInfo()}`);
       });
 
       mongoose.connection.on('disconnected', () => {
-        Logger.log(`${this.connection.getInfo()}: disconnected`);
+        Logger.log(`[${this.name}] disconnected`);
       });
 
       mongoose.connection.on('error', (error) => {
         throw new AppException(StatusCode.INTERNAL_SERVER_ERROR, error);
       });
 
-      const connectionOptions = {
+      const connectionOptions: ConnectOptions = {
         dbName: this.connection.database,
         user: this.connection.user,
         pass: this.connection.password,
