@@ -13,7 +13,9 @@
       },
       "envFile": "${workspaceFolder}/.env.development.local",
       "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
-      "program": "${workspaceFolder}/src/app/index.ts"
+      "program": "${workspaceFolder}/src/app/index.ts",
+      "preLaunchTask": "tsc: build - tsconfig.build.json",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
     }
   ]
 }
