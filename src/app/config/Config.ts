@@ -1,10 +1,9 @@
 import dotenv from 'dotenv';
 import Config from 'nconf';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { EnvironmentUtils } from '../environment/EnvironmentUtils';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 dotenv.config({
   path: EnvironmentUtils.getEnvFilePath(),
