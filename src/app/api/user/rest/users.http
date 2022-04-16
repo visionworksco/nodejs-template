@@ -1,0 +1,43 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/users
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+@entityId = 5ffd7325a01a777e959248a1
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmZkNzMyNWEwMWE3NzdlOTU5MjQ4YTEiLCJpYXQiOjE2MTA0NDU2MDUsImV4cCI6MTYxMDQ3NDQwNX0.I3UQ2cG6ydy6ACmAFlgWG7KMLQQHqoUQCXLjKa5w3C8
+
+### findAll
+GET {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### findById
+GET {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### save
+POST {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+"name": "jdoe3",
+"email": "jdoe3@company.com",
+"password": "12345678",
+}
+
+### updateById
+PATCH {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+"name": "jsmith"
+}
+
+### deleteById
+DELETE {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}

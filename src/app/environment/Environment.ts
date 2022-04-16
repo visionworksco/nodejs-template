@@ -1,12 +1,14 @@
 import { ServerException, StatusCode } from '@visionworksco/nodejs-middleware';
-import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
-import { cleanEnv, str } from 'envalid';
+import dotenvFlow from 'dotenv-flow';
+import envalid from 'envalid';
 import { EnvironmentUtils } from './EnvironmentUtils';
+
+const { cleanEnv, str } = envalid;
 
 export class Environment {
   constructor() {
-    const env = dotenv.config({
+    const env = dotenvFlow.config({
       path: EnvironmentUtils.getEnvFilePath(),
     });
 

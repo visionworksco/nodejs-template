@@ -33,10 +33,6 @@ export class MongoDbStorage implements Storage {
       });
 
       const connectionOptions = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
         dbName: this.connection.database,
         user: this.connection.user,
         pass: this.connection.password,
