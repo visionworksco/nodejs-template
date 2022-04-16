@@ -7,7 +7,7 @@ import {
 import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
-import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { Config } from '../../config/Config';
 import { File } from './File';
 import { FileEntity } from './FileEntity';
 import { FileQueryEntity } from './FileQueryEntity';
@@ -17,7 +17,7 @@ const baseUrl = '/files/download/';
 export class FileController {
   findAll = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
-      const dirPath = EnvironmentUtils.getFileUploadsPath();
+      const dirPath = Config.get('FILE_UPLOAD_PATH');
       fs.readdir(dirPath, (error, files) => {
         if (error) {
           return reject(error);
@@ -40,7 +40,7 @@ export class FileController {
   download = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
       const fileName = req.params.name;
-      const dirPath = EnvironmentUtils.getFileUploadsPath();
+      const dirPath = Config.get('FILE_UPLOAD_PATH');
 
       res.download(dirPath + fileName, fileName, (error) => {
         if (error) {
@@ -57,7 +57,7 @@ export class FileController {
         throw ServerException.create(StatusCode.BAD_REQUEST, 'File field is not defined');
       }
 
-      const dirPath = EnvironmentUtils.getFileUploadsPath();
+      const dirPath = Config.get('FILE_UPLOAD_PATH');
       const fileTypeFilter = /jpg|jpeg|png/;
       await FileUploader(fileQueryEntity, dirPath, fileTypeFilter)(req, res);
       if (!req.file) {

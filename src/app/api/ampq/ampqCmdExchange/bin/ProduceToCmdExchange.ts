@@ -1,6 +1,7 @@
 import { AsyncUtils, DateUtils, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
 import { v4 as uuidv4 } from 'uuid';
+import { Config } from '../../../../config/Config';
 import { AmpqCmdExchangeMessage } from '../AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeService } from '../AmpqCmdExchangeService';
 
@@ -40,7 +41,7 @@ const produce = async (): Promise<void> => {
         return;
     }
 
-    const userId: string | undefined = process.env.RABBITMQ_USER ?? undefined;
+    const userId: string | undefined = Config.get('RABBITMQ_USER') ?? undefined;
 
     const ampqService = new AmpqCmdExchangeService();
     await ampqService.start();

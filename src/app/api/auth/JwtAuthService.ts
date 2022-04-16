@@ -1,5 +1,6 @@
 import { BaseAuthService, Repository } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../class/ClassTransformer';
+import { Config } from '../../config/Config';
 import { UserEntity } from '../user/UserEntity';
 
 export class JwtAuthService extends BaseAuthService<UserEntity> {
@@ -12,6 +13,6 @@ export class JwtAuthService extends BaseAuthService<UserEntity> {
   }
 
   getSecret(): string {
-    return process.env.JWT_SECRET || 'JWT_SECRET';
+    return Config.get('JWT_SECRET');
   }
 }

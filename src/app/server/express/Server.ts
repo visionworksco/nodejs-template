@@ -36,16 +36,17 @@ export class Server {
   private mongoDbStorage: Storage;
   private ampqServices: AmpqServices;
   private routes: Routes;
-  private fileUploadsPath: string;
-  private apiDocsPath: string;
+  private fileUploadPath: string;
+  private apiDocPath: string;
 
   constructor() {
     this.app = express();
     this.name = 'Express.js';
-    this.port = Number(process.env.PORT) || 3000;
+    this.port = Number(Config.get('PORT'));
 
-    this.fileUploadsPath = EnvironmentUtils.getFileUploadsPath();
-    this.apiDocsPath = EnvironmentUtils.getApiDocsPaths();
+    this.apiDocPath = Config.get('API_DOC_PATH');
+
+    this.fileUploadPath = Config.get('FILE_UPLOAD_PATH');
 
     this.psqlStorage = new PsqlStorage(new PsqlStorageConnection());
     this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
@@ -58,20 +59,21 @@ export class Server {
     try {
       this.app.use(
         ResponseHeaders(
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_ORIGIN,
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_HEADERS,
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_METHODS,
+          Config.get('ACCESS_CONTROL_ALLOW_ORIGIN'),
+          Config.get('ACCESS_CONTROL_ALLOW_HEADERS'),
+          Config.get('ACCESS_CONTROL_ALLOW_METHODS'),
         ),
       );
       this.app.use(JsonParser());
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
       this.app.use(Cors());
-      if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development.local') {
+
+      if (['development', 'development.local'].includes(Config.get('NODE_ENV'))) {
         this.app.use(HttpLogger());
       }
-      this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
-      this.app.use(this.apiDocsPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
+      this.app.use(this.fileUploadPath, StaticFolderRegister(this.fileUploadPath));
+      this.app.use(this.apiDocPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
 
       this.onStop();
 

@@ -5,6 +5,7 @@ import {
   ServerException,
 } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../../class/ClassTransformer';
+import { Config } from '../../../config/Config';
 import { ConfigEntity } from '../ConfigEntity';
 
 export class ConfigEnvRepository implements Repository<ConfigEntity> {
@@ -20,7 +21,7 @@ export class ConfigEnvRepository implements Repository<ConfigEntity> {
       if (id === key) {
         entity = {
           ...entity,
-          [key]: process.env.PAYPAL_CLIENT_ID,
+          [key]: Config.get('PAYPAL_CLIENT_ID'),
         };
       }
 

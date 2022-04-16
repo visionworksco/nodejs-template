@@ -1,4 +1,5 @@
 import { DbStorageConnection } from '@visionworksco/nodejs-middleware';
+import { Config } from '../../config/Config';
 
 export class PsqlStorageConnection implements DbStorageConnection {
   host: string;
@@ -8,19 +9,11 @@ export class PsqlStorageConnection implements DbStorageConnection {
   password: string;
 
   constructor(database?: string) {
-    const {
-      POSTGRESQL_HOST = '',
-      POSTGRESQL_PORT = 5432,
-      POSTGRESQL_DATABASE = '',
-      POSTGRESQL_USER = '',
-      POSTGRESQL_PASSWORD = '',
-    } = process.env;
-
-    this.host = POSTGRESQL_HOST;
-    this.port = Number(POSTGRESQL_PORT);
-    this.database = POSTGRESQL_DATABASE;
-    this.user = POSTGRESQL_USER;
-    this.password = POSTGRESQL_PASSWORD;
+    this.host = Config.get('POSTGRESQL_HOST');
+    this.port = Number(Config.get('POSTGRESQL_PORT'));
+    this.database = database ?? Config.get('POSTGRESQL_DATABASE');
+    this.user = Config.get('POSTGRESQL_USER');
+    this.password = Config.get('POSTGRESQL_PASSWORD');
   }
 
   getInfo(): string {

@@ -68,7 +68,7 @@ export class Routes {
 
   constructor(app: Application) {
     this.app = app;
-    this.apiVersion = Config.get('AppConfig').API_VERSION;
+    this.apiVersion = Config.get('API_VERSION');
     this.baseUrl = `/${this.apiVersion}/api`;
   }
 
@@ -144,11 +144,11 @@ export class Routes {
   };
 
   private registerProductionClientRoute = (): void => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (Config.get('NODE_ENV') !== 'production') {
       return;
     }
 
-    const clientBuildPath = process.env.CLIENT_BUILD_PATH || '/';
+    const clientBuildPath = Config.get('CLIENT_BUILD_PATH');
     this.app.use(StaticFolderRegister(`${clientBuildPath}`));
 
     this.app.get('*', (req: Request, res: Response) => {

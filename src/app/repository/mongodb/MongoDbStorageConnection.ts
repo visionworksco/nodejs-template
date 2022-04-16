@@ -1,4 +1,5 @@
 import { DbStorageConnection } from '@visionworksco/nodejs-middleware';
+import { Config } from '../../config/Config';
 
 export class MongoDbStorageConnection implements DbStorageConnection {
   host: string;
@@ -8,19 +9,11 @@ export class MongoDbStorageConnection implements DbStorageConnection {
   password: string;
 
   constructor() {
-    const {
-      MONGODB_HOST = '',
-      MONGODB_PORT = 27017,
-      MONGODB_DATABASE = '',
-      MONGODB_USER = '',
-      MONGODB_PASSWORD = '',
-    } = process.env;
-
-    this.host = MONGODB_HOST;
-    this.port = Number(MONGODB_PORT);
-    this.database = MONGODB_DATABASE;
-    this.user = MONGODB_USER;
-    this.password = MONGODB_PASSWORD;
+    this.host = Config.get('MONGODB_HOST');
+    this.port = Number(Config.get('MONGODB_PORT'));
+    this.database = Config.get('MONGODB_DATABASE');
+    this.user = Config.get('MONGODB_USER');
+    this.password = Config.get('MONGODB_PASSWORD');
   }
 
   getInfo(): string {

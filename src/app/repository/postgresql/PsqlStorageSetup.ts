@@ -4,7 +4,7 @@ import { PsqlStorage } from './PsqlStorage';
 import { PsqlStorageConnection } from './PsqlStorageConnection';
 import { PsqlTable } from './PsqlTable';
 
-new Environment();
+Environment.init();
 
 const SQL_QUERY_BASE_API_ENTITY = `"id" SERIAL PRIMARY KEY,
         "_createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,

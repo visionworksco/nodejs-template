@@ -10,7 +10,7 @@ export class Application {
 
   constructor() {
     this.name = 'Application';
-    new Environment();
+    Environment.init();
     this.server = new Server();
   }
 
