@@ -2,6 +2,7 @@ import { ExceptionHandler, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
 import { Environment } from '../environment/Environment';
 import { Server } from '../server/express/Server';
+const packageJson = require('../../../package.json');
 
 export class Application {
   private name: string;
@@ -17,7 +18,7 @@ export class Application {
     try {
       Logger.log(`[${this.name}] starting...`);
       await this.server.start();
-      Logger.log(`[${this.name}] started`);
+      Logger.log(`[${this.name}] started ${packageJson.name}:${packageJson.version}`);
     } catch (error) {
       if (error instanceof Error) {
         ExceptionHandler.handle(error);
