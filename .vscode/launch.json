@@ -11,7 +11,7 @@
         "DEBUG": "true",
         "MOCK_DATA": "true"
       },
-      "envFile": "${workspaceFolder}/.env_dev.local",
+      "envFile": "${workspaceFolder}/.env.development.local",
       "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
       "preLaunchTask": "tsc: build - tsconfig.json",
       "program": "${workspaceFolder}/src/app/index.ts"

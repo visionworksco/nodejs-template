@@ -1,8 +1,6 @@
-mongodb
 rabbitmq
 swagger
 config
-auth
 debug
 log application started: app name and version
 rename src/docs -> src/doc
