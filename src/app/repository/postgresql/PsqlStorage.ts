@@ -5,7 +5,7 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import pg from 'pg';
+import pg, { PoolConfig } from 'pg';
 
 export class PsqlStorage implements Storage {
   private _name: string;
@@ -30,7 +30,7 @@ export class PsqlStorage implements Storage {
     try {
       const { host, port, database, user, password } = this.connection;
 
-      const psqlConfig = {
+      const psqlConfig: PoolConfig = {
         host,
         port,
         database,

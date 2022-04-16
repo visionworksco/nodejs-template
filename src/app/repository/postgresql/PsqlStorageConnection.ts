@@ -9,18 +9,18 @@ export class PsqlStorageConnection implements DbStorageConnection {
 
   constructor(database?: string) {
     const {
-      POSTGRES_HOST = '',
-      POSTGRES_PORT = 5432,
-      POSTGRES_DATABASE = '',
-      POSTGRES_USER = '',
-      POSTGRES_PASSWORD = '',
+      POSTGRESQL_HOST = '',
+      POSTGRESQL_PORT = 5432,
+      POSTGRESQL_DATABASE = '',
+      POSTGRESQL_USER = '',
+      POSTGRESQL_PASSWORD = '',
     } = process.env;
 
-    this.host = POSTGRES_HOST;
-    this.port = Number(POSTGRES_PORT);
-    this.database = database ?? POSTGRES_DATABASE;
-    this.user = POSTGRES_USER;
-    this.password = POSTGRES_PASSWORD;
+    this.host = POSTGRESQL_HOST;
+    this.port = Number(POSTGRESQL_PORT);
+    this.database = POSTGRESQL_DATABASE;
+    this.user = POSTGRESQL_USER;
+    this.password = POSTGRESQL_PASSWORD;
   }
 
   getInfo(): string {

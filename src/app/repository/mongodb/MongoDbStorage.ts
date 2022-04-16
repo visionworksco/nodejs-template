@@ -34,13 +34,16 @@ export class MongoDbStorage implements Storage {
         throw new AppException(StatusCode.INTERNAL_SERVER_ERROR, error);
       });
 
+      const { host, port, database, user, password } = this.connection;
+      const connectionUrl = `mongodb://${host}:${port}`;
+
       const connectionOptions: ConnectOptions = {
-        dbName: this.connection.database,
-        user: this.connection.user,
-        pass: this.connection.password,
+        dbName: database,
+        user,
+        pass: password,
       };
 
-      await mongoose.connect(this.connection.host, connectionOptions);
+      await mongoose.connect(connectionUrl, connectionOptions);
     } catch (error) {
       return Promise.reject(error);
     }

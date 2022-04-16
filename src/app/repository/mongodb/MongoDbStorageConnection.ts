@@ -2,27 +2,28 @@ import { DbStorageConnection } from '@visionworksco/nodejs-middleware';
 
 export class MongoDbStorageConnection implements DbStorageConnection {
   host: string;
-  database: string;
   port: number;
+  database: string;
   user: string;
   password: string;
 
   constructor() {
     const {
       MONGODB_HOST = '',
-      MONGODB_NAME = '',
+      MONGODB_PORT = 27017,
+      MONGODB_DATABASE = '',
       MONGODB_USER = '',
-      MONGODB_USER_PASSWORD = '',
+      MONGODB_PASSWORD = '',
     } = process.env;
 
     this.host = MONGODB_HOST;
-    this.database = MONGODB_NAME;
-    this.port = 27017;
+    this.port = Number(MONGODB_PORT);
+    this.database = MONGODB_DATABASE;
     this.user = MONGODB_USER;
-    this.password = MONGODB_USER_PASSWORD;
+    this.password = MONGODB_PASSWORD;
   }
 
   getInfo(): string {
-    return `${this.host}/${this.database}`;
+    return `${this.host}:${this.port}/${this.database}`;
   }
 }
