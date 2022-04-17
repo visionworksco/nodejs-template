@@ -18,11 +18,11 @@ export class PsqlStorage implements Storage {
     this.pool = null;
   }
 
-  get psql() {
+  get psql(): pg.Pool | null {
     return this.pool;
   }
 
-  get name() {
+  get name(): string {
     return this._name;
   }
 

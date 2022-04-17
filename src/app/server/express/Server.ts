@@ -1,4 +1,5 @@
 import {
+  AmpqServices,
   AppException,
   CookieParser,
   Cors,
@@ -10,7 +11,6 @@ import {
   ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
-  Storage,
   Storages,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
@@ -20,7 +20,6 @@ import apiDocs from '../../../docs';
 import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
-import { AmpqServices } from '../../messageBroker/AmpqServices';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
@@ -32,8 +31,8 @@ export class Server {
   private port: number;
   private app: Application;
   private storages: Storages;
-  private psqlStorage: Storage;
-  private mongoDbStorage: Storage;
+  private psqlStorage: PsqlStorage | null;
+  private mongoDbStorage: MongoDbStorage | null;
   private ampqServices: AmpqServices;
   private routes: Routes;
   private fileUploadPath: string;
@@ -48,11 +47,16 @@ export class Server {
 
     this.fileUploadPath = Config.get('FILE_UPLOAD_PATH');
 
-    this.psqlStorage = new PsqlStorage(new PsqlStorageConnection());
-    this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
+    this.psqlStorage = Config.get('SERVICE_POSTGRESQL')
+      ? new PsqlStorage(new PsqlStorageConnection())
+      : null;
+    this.mongoDbStorage = Config.get('SERVICE_MONGODB')
+      ? new MongoDbStorage(new MongoDbStorageConnection())
+      : null;
     this.storages = new Storages(this.psqlStorage, this.mongoDbStorage);
 
-    this.ampqServices = new AmpqServices(new AmpqCmdExchangeService());
+    const rabbitMQService = Config.get('SERVICE_RABBITMQ') ? new AmpqCmdExchangeService() : null;
+    this.ampqServices = new AmpqServices(rabbitMQService);
 
     this.routes = new Routes(this.app);
 
@@ -89,8 +93,10 @@ export class Server {
   async start(): Promise<void> {
     try {
       // data storage
-      Logger.log(`[${this.name}] connecting data storage...`);
-      await this.storages.connect();
+      if (this.storages.size > 0) {
+        Logger.log(`[${this.name}] connecting data storage...`);
+        await this.storages.connect();
+      }
 
       // routes
       await this.routes.register(this.psqlStorage);
@@ -106,8 +112,10 @@ export class Server {
       });
 
       // message broker
-      Logger.log(`[${this.name}] starting message broker...`);
-      await this.ampqServices.start();
+      if (this.ampqServices.size > 0) {
+        Logger.log(`[${this.name}] starting message broker...`);
+        await this.ampqServices.start();
+      }
     } catch (error) {
       return Promise.reject(error);
     }

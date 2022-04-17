@@ -2,7 +2,6 @@ import {
   RootRoute,
   Route,
   StaticFolderRegister,
-  Storage,
   UndefinedRoute,
 } from '@visionworksco/nodejs-middleware';
 import { Application, Request, Response } from 'express';
@@ -72,11 +71,11 @@ export class Routes {
     this.baseUrl = `/${this.apiVersion}/api`;
   }
 
-  async register(storage: Storage): Promise<void> {
+  async register(psqlStorage: PsqlStorage | null): Promise<void> {
     try {
       // PostgreSQL pool object
-      if (storage instanceof PsqlStorage) {
-        this.psqlPool = storage.psql;
+      if (psqlStorage) {
+        this.psqlPool = psqlStorage.psql;
       }
 
       if (this.psqlPool) {

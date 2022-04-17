@@ -23,6 +23,9 @@ Config
     JWT_SECRET: 'JWT_SECRET',
     FILE_UPLOAD_PATH: '/',
     CLIENT_BUILD_PATH: '/',
+    SERVICE_MONGODB: true,
+    SERVICE_POSTGRESQL: false,
+    SERVICE_RABBITMQ: false,
   })
   // 5. Required varaibles
   .required([]);

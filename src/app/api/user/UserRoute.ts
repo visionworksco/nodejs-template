@@ -24,7 +24,8 @@ export class UserRoute extends BaseCrudRoute<UserEntity> {
   }
 
   protected findAllHandlers = (): RequestHandler[] => [
-    Authenticate(this.authService),
+    // TODO
+    // Authenticate(this.authService),
     this.findAll,
   ];
 
