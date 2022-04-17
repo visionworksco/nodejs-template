@@ -1,5 +1,5 @@
 import {
-  AppException,
+  ApplicationException,
   DbStorageConnection,
   Logger,
   StatusCode,
@@ -31,7 +31,7 @@ export class MongoDbStorage implements Storage {
       });
 
       mongoose.connection.on('error', (error) => {
-        throw new AppException(StatusCode.INTERNAL_SERVER_ERROR, error);
+        throw new ApplicationException(StatusCode.INTERNAL_SERVER_ERROR, error);
       });
 
       const { host, port, database, user, password } = this.connection;

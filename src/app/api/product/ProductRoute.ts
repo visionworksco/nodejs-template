@@ -1,7 +1,7 @@
 import {
   AuthData,
   Authenticate,
-  Authorize,
+  AuthorizeDefault,
   AuthorizeUser,
   AuthService,
   BaseCrudController,
@@ -56,9 +56,9 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   ];
 
   protected updateByIdHandlers = (handlerId?: string): RequestHandler[] => [
-    Authorize(Public, this.permissionSchemaId, handlerId),
+    AuthorizeDefault(Public, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
-    Authorize(Authenticated, this.permissionSchemaId, handlerId),
+    AuthorizeDefault(Authenticated, this.permissionSchemaId, handlerId),
     AuthorizeUser(Context.getInstance().applicationRoles, this.permissionSchemaId, handlerId),
     this.updateById,
   ];

@@ -1,13 +1,13 @@
 import {
   AmpqServices,
-  AppException,
+  ApplicationException,
   CookieParser,
-  Cors,
+  CorsHandler,
   ExceptionHandler,
   HttpLogger,
   JsonParser,
   Logger,
-  ResponseHeaders,
+  ResponseHeadersHandler,
   ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
@@ -62,7 +62,7 @@ export class Server {
 
     try {
       this.app.use(
-        ResponseHeaders(
+        ResponseHeadersHandler(
           Config.get('ACCESS_CONTROL_ALLOW_ORIGIN'),
           Config.get('ACCESS_CONTROL_ALLOW_HEADERS'),
           Config.get('ACCESS_CONTROL_ALLOW_METHODS'),
@@ -71,7 +71,7 @@ export class Server {
       this.app.use(JsonParser());
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
-      this.app.use(Cors());
+      this.app.use(CorsHandler());
 
       if (['development', 'development.local'].includes(Config.get('NODE_ENV'))) {
         this.app.use(HttpLogger());
@@ -84,7 +84,7 @@ export class Server {
       this.app.use(ServerExceptionHandler);
     } catch (error) {
       if (error instanceof Error) {
-        const appError = new AppException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
+        const appError = new ApplicationException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
         ExceptionHandler.handle(appError);
       }
     }
