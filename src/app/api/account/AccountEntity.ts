@@ -2,10 +2,10 @@
 
 import { Exclude, Expose } from 'class-transformer';
 import { IsArray, IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { PsqlApiEntity } from '../../repository/postgresql/PsqlApiEntity';
 import { Account } from './Account';
 
-export class AccountEntity extends BaseApiEntity implements Account {
+export class AccountEntity extends PsqlApiEntity implements Account {
   @Expose()
   @IsEmail()
   email = '';
