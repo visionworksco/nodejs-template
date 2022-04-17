@@ -1,6 +1,6 @@
 import { Options } from 'amqplib';
 import fs from 'fs';
-import { Config } from '../config/Config';
+import { Config } from '../../config/Config';
 
 const connectionOptions = (): Options.Connect => {
   return {

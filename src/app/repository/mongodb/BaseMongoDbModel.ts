@@ -10,4 +10,4 @@ const Document = new Schema(
   { timestamps: true },
 );
 
-export const BaseModel = model('Document', Document);
+export const BaseMongoDbModel = model('Document', Document);

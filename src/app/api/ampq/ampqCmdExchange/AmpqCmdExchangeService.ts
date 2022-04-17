@@ -2,7 +2,7 @@ import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
-import { BaseAmpqService } from '../../../messageBroker/BaseAmpqService';
+import { BaseAmpqService } from '../../../messageBroker/ampq/BaseAmpqService';
 import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';
 import { AmpqCmdExchangeMessageEntity } from './AmpqCmdExchangeMessageEntity';
 

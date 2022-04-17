@@ -1,5 +1,5 @@
 import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
-import { AmpqExchangeName } from '../api/ampq/AmpqExchangeName';
+import { AmpqExchangeName } from '../../api/ampq/AmpqExchangeName';
 import { AmpqConfig } from './AmpqConfig';
 
 export abstract class BaseAmpqService implements AmpqService {

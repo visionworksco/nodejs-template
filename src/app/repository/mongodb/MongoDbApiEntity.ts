@@ -2,7 +2,7 @@
 
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { ObjectId } from 'mongodb';
-import { BaseApiEntity } from './BaseApiEntity';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
 
 export class MongoDbApiEntity extends BaseApiEntity {
   @Expose({ name: '_id' })

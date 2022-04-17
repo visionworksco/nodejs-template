@@ -8,7 +8,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { MongoDbApiEntity } from '../../entity/MongoDbApiEntity';
+import { MongoDbApiEntity } from '../../repository/mongodb/MongoDbApiEntity';
 import { ApplicationRole } from '../../role/application/ApplicationRole';
 import { User } from './User';
 

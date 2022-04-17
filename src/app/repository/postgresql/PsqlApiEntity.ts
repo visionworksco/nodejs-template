@@ -2,7 +2,7 @@
 
 import { Expose, Transform, Type } from 'class-transformer';
 import { nanoid } from 'nanoid';
-import { BaseApiEntity } from './BaseApiEntity';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
 
 export class PsqlApiEntity extends BaseApiEntity {
   @Expose()
