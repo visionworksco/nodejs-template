@@ -6,8 +6,8 @@
 @contentTypeJson = application/json
 @contentTypeFormData = multipart/form-data
 @entityId = 60093693036ea445afeb50e5
-@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDA5MzY5MzAzNmVhNDQ1YWZlYjUwZTIiLCJpYXQiOjE2MTEyMTc0ODEsImV4cCI6MTYxMTI0NjI4MX0.VQ58pCB6omWgLYe-H88lBxZWaL0M3vGelV9Sy_d7xOk
+@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVhOWJjZjEzZjk0YmVmY2MwZjFlZGYiLCJpYXQiOjE2NTAxOTAzODYsImV4cCI6MTY1MDIxOTE4Nn0.SKiYhd93pGyek2_ukdtscLdajXxulxCBHxLs7WzgqoI; HttpOnly; Max-Age=28800
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVhOWJjZjEzZjk0YmVmY2MwZjFlZGYiLCJpYXQiOjE2NTAxOTAzODYsImV4cCI6MTY1MDIxOTE4Nn0.SKiYhd93pGyek2_ukdtscLdajXxulxCBHxLs7WzgqoI
 ### head
 HEAD {{url}} {{protocol}}
 
@@ -44,11 +44,11 @@ Content-Type: {{contentTypeJson}}
 ### save
 POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-# Cookie: {{authCookie}}
-Authorization: {{authHeader}}
+Cookie: {{authCookie}}
+# Authorization: {{authHeader}}
 
 {
-    "name": "Test Product",
+    "name": "Test Product5",
     "image": "/assets/images/airpods.jpg",
     "description": "test description...",
     "brand": "Apple",
