@@ -1,16 +1,14 @@
 /* istanbul ignore file */
 
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
-import { ObjectId } from 'mongodb';
+import { Exclude, Expose, Transform } from 'class-transformer';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
 
 export class MongoDbApiEntity extends BaseApiEntity {
   @Expose({ name: '_id' })
   @Exclude()
-  @Type(() => ObjectId)
   @Transform(
     (value, obj) => {
-      return value ? value.toString() : obj.id;
+      return value ?? obj.id;
     },
     { toClassOnly: true },
   )
