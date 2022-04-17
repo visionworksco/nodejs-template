@@ -5,7 +5,6 @@ export const Editor: ApiRole = {
   ...Authenticated,
   product: {
     ...Authenticated.product,
-    updateById: true,
-    replaceById: true,
+    save: true,
   },
 };

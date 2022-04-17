@@ -5,6 +5,7 @@ export const Admin: ApiRole = {
   ...Authenticated,
   product: {
     ...Authenticated.product,
+    save: true,
     updateById: true,
     replaceById: true,
     deleteById: true,

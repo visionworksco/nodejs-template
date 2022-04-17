@@ -4,8 +4,8 @@ export const Authenticated: ApiRole = {
   product: {
     findAll: true,
     findById: true,
-    save: true,
-    updateById: false,
+    save: false,
+    updateById: true,
     replaceById: false,
     deleteById: false,
   },

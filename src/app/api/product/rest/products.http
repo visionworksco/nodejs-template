@@ -5,9 +5,10 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @contentTypeFormData = multipart/form-data
-@entityId = 60093693036ea445afeb50e5
-@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjMjMxODc2OTYxNGQ2ZGM4ODY1OTEiLCJpYXQiOjE2NTAyMzA4NzEsImV4cCI6MTY1MDI1OTY3MX0.wuHtXA9TBBhymkqrF4uxuBqJxs-qyCAcB22ilMdiGt8; HttpOnly; Max-Age=28800
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjMjMxODc2OTYxNGQ2ZGM4ODY1OTEiLCJpYXQiOjE2NTAyMzA4NzEsImV4cCI6MTY1MDI1OTY3MX0.wuHtXA9TBBhymkqrF4uxuBqJxs-qyCAcB22ilMdiGt8
+@entityId = 625c87472b7e7b72f285fd24
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjMjMxODc2OTYxNGQ2ZGM4ODY1OTEiLCJpYXQiOjE2NTAyMzI3MjMsImV4cCI6MTY1MDI2MTUyM30.k8YU7Rw5bfv6yzGQF6oPZscztlqYv3sWDpzYMnmgGfk
+@authCookie = Authorization={{token}}; HttpOnly; Max-Age=28800
+@authHeader = Bearer {{token}}
 
 ### head
 HEAD {{url}} {{protocol}}
@@ -27,7 +28,7 @@ Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
 ### findAll with params
-GET {{url}}?keyword=phone {{protocol}}
+GET {{url}}?keyword=product {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 ### findAll with a paginator
@@ -45,11 +46,11 @@ Content-Type: {{contentTypeJson}}
 ### save
 POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-# Cookie: {{authCookie}}
-Authorization: {{authHeader}}
+Cookie: {{authCookie}}
+# Authorization: {{authHeader}}
 
 {
-    "name": "product4",
+    "name": "product6",
     "image": "/assets/images/airpods.jpg",
     "description": "description...",
     "brand": "Apple",
@@ -64,11 +65,11 @@ Authorization: {{authHeader}}
 ### updateById
 PATCH {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-# Cookie: {{authCookie}}
+Cookie: {{authCookie}}
 # Authorization: {{authHeader}}
 
 {
-  "description": ""
+  "description": "updated description..."
 }
 
 ### deleteById
