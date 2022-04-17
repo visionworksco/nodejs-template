@@ -80,8 +80,6 @@ export class Server {
       this.app.use(this.apiDocPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
 
       this.onStop();
-
-      this.app.use(ServerExceptionHandler);
     } catch (error) {
       if (error instanceof Error) {
         const appError = new ApplicationException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
@@ -100,6 +98,9 @@ export class Server {
 
       // routes
       await this.routes.register(this.psqlStorage);
+
+      // exception handler
+      this.app.use(ServerExceptionHandler);
 
       // server
       Logger.log(`[${this.name}] starting server...`);
