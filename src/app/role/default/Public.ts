@@ -3,9 +3,9 @@ import { ApiRole } from '../ApiRole';
 export const Public: ApiRole = {
   product: {
     findAll: true,
-    findById: false,
+    findById: true,
     save: false,
-    updateById: true,
+    updateById: false,
     replaceById: false,
     deleteById: false,
   },
