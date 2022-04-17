@@ -32,4 +32,8 @@ export class BaseApiEntity implements ApiEntity {
   @IsString()
   @IsNotEmpty()
   updatedBy?: string;
+
+  getPrimaryKeys(): string[] {
+    return [];
+  }
 }

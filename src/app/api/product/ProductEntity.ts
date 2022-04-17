@@ -2,11 +2,10 @@ import { MongoDbUtils } from '@visionworksco/nodejs-middleware';
 import { Expose, Transform, Type } from 'class-transformer';
 import { IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ObjectId } from 'mongodb';
-import { BaseApiEntity } from '../../entity/BaseApiEntity';
-import { UserEntity } from '../user/UserEntity';
+import { MongoDbApiEntity } from '../../repository/mongodb/MongoDbApiEntity';
 import { Product } from './Product';
 
-export class ProductEntity extends BaseApiEntity implements Product {
+export class ProductEntity extends MongoDbApiEntity implements Product {
   @Expose()
   @IsString()
   @IsNotEmpty()
@@ -57,7 +56,7 @@ export class ProductEntity extends BaseApiEntity implements Product {
   @Transform(MongoDbUtils.toObjectId('user'), { toClassOnly: true })
   @IsMongoId()
   @IsNotEmpty()
-  user: UserEntity | string = ''; // reference: Product MANY_TO_ONE User
+  user = '';
 
   @Expose()
   @Type(() => ObjectId)
@@ -65,13 +64,5 @@ export class ProductEntity extends BaseApiEntity implements Product {
   @IsOptional()
   @IsMongoId()
   @IsNotEmpty()
-  reviews?: string[]; // reference: Product MANY_TO_ONE Review
-
-  constructor() {
-    super();
-  }
-
-  getPrimaryKeys(): string[] {
-    return [];
-  }
+  reviews?: string[];
 }
