@@ -25,7 +25,7 @@ Config
     CLIENT_BUILD_PATH: '/',
     SERVICE_MONGODB: true,
     SERVICE_POSTGRESQL: false,
-    SERVICE_RABBITMQ: false,
+    SERVICE_RABBITMQ: true,
   })
   // 5. Required varaibles
   .required([]);
