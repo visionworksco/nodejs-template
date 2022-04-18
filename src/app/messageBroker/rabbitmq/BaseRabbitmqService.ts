@@ -1,21 +1,23 @@
 import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
-import { AmpqExchangeName } from '../../api/ampq/AmpqExchangeName';
+import { RabbitmqExchangeName } from '../../api/rabbitmq/RabbitmqExchangeName';
 import { AmpqConfig } from './AmpqConfig';
 
-export abstract class BaseAmpqService implements AmpqService {
+export abstract class BaseRabbitmqService implements AmpqService {
+  protected config: AmpqConfig;
+  protected exchangeName: RabbitmqExchangeName;
   protected name: string;
   protected ampq: AmpqPubSub | null;
-  protected exchangeName: AmpqExchangeName;
 
-  constructor(exchangeName: AmpqExchangeName) {
+  constructor(config: AmpqConfig, exchangeName: RabbitmqExchangeName) {
+    this.config = config;
+    this.exchangeName = exchangeName;
     this.name = 'RabbitMQ';
     this.ampq = null;
-    this.exchangeName = exchangeName;
   }
 
   async start(): Promise<void> {
     try {
-      this.ampq = new AmpqPubSub(AmpqConfig.connectionOptions(), AmpqConfig.socketOptions(), 1);
+      this.ampq = new AmpqPubSub(this.config.connectionOptions, this.config.socketOptions, 1);
       await this.ampq.connect();
       await this.ampq.registerExchange(this.exchangeName);
 

@@ -17,9 +17,10 @@ import {
 import express, { Application } from 'express';
 import swaggerUI from 'swagger-ui-express';
 import apiDocs from '../../../docs';
-import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
+import { RabbitmqCmdExchangeService } from '../../api/rabbitmq/rabbitmqCmdExchange/RabbitmqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
+import { RabbitmqConfig } from '../../messageBroker/rabbitmq/RabbitmqConfig';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
@@ -55,7 +56,9 @@ export class Server {
       : null;
     this.storages = new Storages(this.psqlStorage, this.mongoDbStorage);
 
-    const rabbitMQService = Config.get('SERVICE_RABBITMQ') ? new AmpqCmdExchangeService() : null;
+    const rabbitMQService = Config.get('SERVICE_RABBITMQ')
+      ? new RabbitmqCmdExchangeService(new RabbitmqConfig())
+      : null;
     this.ampqServices = new AmpqServices(rabbitMQService);
 
     this.routes = new Routes(this.app);

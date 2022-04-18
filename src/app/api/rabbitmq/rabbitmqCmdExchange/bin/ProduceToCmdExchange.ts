@@ -2,8 +2,9 @@ import { AsyncUtils, DateUtils, Logger } from '@visionworksco/nodejs-middleware'
 import { nanoid } from 'nanoid';
 import 'reflect-metadata';
 import { Config } from '../../../../config/Config';
-import { AmpqCmdExchangeMessage } from '../AmpqCmdExchangeMessage';
-import { AmpqCmdExchangeService } from '../AmpqCmdExchangeService';
+import { RabbitmqConfig } from '../../../../messageBroker/rabbitmq/RabbitmqConfig';
+import { RabbitmqCmdExchangeMessage } from '../RabbitmqCmdExchangeMessage';
+import { RabbitmqCmdExchangeService } from '../RabbitmqCmdExchangeService';
 
 const produce = async (): Promise<void> => {
   try {
@@ -12,7 +13,7 @@ const produce = async (): Promise<void> => {
       return;
     }
 
-    const messageValid: AmpqCmdExchangeMessage = {
+    const messageValid: RabbitmqCmdExchangeMessage = {
       id: nanoid(),
       timestamp: DateUtils.toISOString(new Date()),
       to: 'stromtanke',
@@ -23,7 +24,7 @@ const produce = async (): Promise<void> => {
       linkedMsg: null,
     };
 
-    const messageInvalid: AmpqCmdExchangeMessage = {
+    const messageInvalid: RabbitmqCmdExchangeMessage = {
       ...messageValid,
       to: 'cockpit',
       from: 'stromtanke',
@@ -31,7 +32,7 @@ const produce = async (): Promise<void> => {
         '{"customer":"TM","requestID":"31ed770b-3f4d-4f2e-a6f9-32385be9dd75","grid":"RWE","volume":15.4,"priceCent":null,"duration":4,"localDateTime":"2021-03-17T21:00:00+01:00","strategy":null},{"customer":"TM","requestID":"31ed770b-3f4d-4f2e-a6f9-32385be9dd99","grid":"EON","volume":20.7,"priceCent":null,"duration":1,"localDateTime":"2021-03-17T21:00:00+01:00","strategy":null}',
     };
 
-    let message: AmpqCmdExchangeMessage;
+    let message: RabbitmqCmdExchangeMessage;
     switch (args[0]) {
       case '-valid':
         message = messageValid;
@@ -45,7 +46,7 @@ const produce = async (): Promise<void> => {
 
     const userId: string | undefined = Config.get('RABBITMQ_USER') ?? undefined;
 
-    const ampqService = new AmpqCmdExchangeService();
+    const ampqService = new RabbitmqCmdExchangeService(new RabbitmqConfig());
     await ampqService.start();
     await ampqService.produce(message, userId);
     await AsyncUtils.wait(500);

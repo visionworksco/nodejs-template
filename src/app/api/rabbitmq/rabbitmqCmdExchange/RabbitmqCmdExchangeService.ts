@@ -2,13 +2,14 @@ import { Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
-import { BaseAmpqService } from '../../../messageBroker/ampq/BaseAmpqService';
-import { AmpqCmdExchangeMessage } from './AmpqCmdExchangeMessage';
-import { AmpqCmdExchangeMessageEntity } from './AmpqCmdExchangeMessageEntity';
+import { AmpqConfig } from '../../../messageBroker/rabbitmq/AmpqConfig';
+import { BaseRabbitmqService } from '../../../messageBroker/rabbitmq/BaseRabbitmqService';
+import { RabbitmqCmdExchangeMessage } from './RabbitmqCmdExchangeMessage';
+import { RabbitmqCmdExchangeMessageEntity } from './RabbitmqCmdExchangeMessageEntity';
 
-export class AmpqCmdExchangeService extends BaseAmpqService {
-  constructor() {
-    super('CMD');
+export class RabbitmqCmdExchangeService extends BaseRabbitmqService {
+  constructor(config: AmpqConfig) {
+    super(config, 'CMD');
   }
 
   afterStart(): void {
@@ -31,7 +32,7 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
           }
 
           const messagePayload = ClassTransformer.fromPlain(
-            AmpqCmdExchangeMessageEntity,
+            RabbitmqCmdExchangeMessageEntity,
             this.ampq.toPayload(message),
           );
 
@@ -52,7 +53,7 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
     }
   }
 
-  async produce(message: AmpqCmdExchangeMessage, userId?: string): Promise<void> {
+  async produce(message: RabbitmqCmdExchangeMessage, userId?: string): Promise<void> {
     try {
       if (!this.ampq) {
         return;
