@@ -21,7 +21,7 @@ Config
     HTTP_TIMEOUT: 10000,
     API_DOC_PATH: '/api-doc',
     JWT_SECRET: 'JWT_SECRET',
-    FILE_UPLOAD_PATH: '/',
+    FILE_UPLOAD_PATH: './public/static/uploads',
     CLIENT_BUILD_PATH: '/',
     SERVICE_MONGODB: true,
     SERVICE_POSTGRESQL: false,

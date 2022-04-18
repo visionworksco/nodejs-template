@@ -33,6 +33,10 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     this.registerAdditionalRoutes();
   }
 
+  getBaseUrl(): string {
+    return '/products';
+  }
+
   private registerAdditionalRoutes() {
     this.router.post(`${this.getBaseUrl()}/upload`, [this.upload]);
   }
@@ -44,10 +48,6 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
       next(error);
     }
   };
-
-  getBaseUrl(): string {
-    return '/products';
-  }
 
   protected saveHandlers = (handlerId?: string): RequestHandler[] => [
     Authenticate(this.authService),
