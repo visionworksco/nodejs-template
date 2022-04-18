@@ -1,8 +1,7 @@
+import { AmpqConfig, AmpqSocketOptions } from '@visionworksco/nodejs-middleware';
 import { Options } from 'amqplib';
 import fs from 'fs';
 import { Config } from '../../config/Config';
-import { AmpqConfig } from './AmpqConfig';
-import { AmpqSocketOptions } from './AmpqSocketOptions';
 
 export class RabbitmqConfig implements AmpqConfig {
   get connectionOptions(): Options.Connect {

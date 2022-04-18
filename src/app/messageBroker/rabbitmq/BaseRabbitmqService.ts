@@ -1,6 +1,5 @@
-import { AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
+import { AmpqConfig, AmpqPubSub, AmpqService, Logger } from '@visionworksco/nodejs-middleware';
 import { RabbitmqExchangeName } from '../../api/rabbitmq/RabbitmqExchangeName';
-import { AmpqConfig } from './AmpqConfig';
 
 export abstract class BaseRabbitmqService implements AmpqService {
   protected config: AmpqConfig;

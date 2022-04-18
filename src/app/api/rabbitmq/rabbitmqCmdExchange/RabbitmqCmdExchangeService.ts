@@ -1,8 +1,7 @@
-import { Logger } from '@visionworksco/nodejs-middleware';
+import { AmpqConfig, Logger } from '@visionworksco/nodejs-middleware';
 import { ConsumeMessage } from 'amqplib';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { EnvironmentUtils } from '../../../environment/EnvironmentUtils';
-import { AmpqConfig } from '../../../messageBroker/rabbitmq/AmpqConfig';
 import { BaseRabbitmqService } from '../../../messageBroker/rabbitmq/BaseRabbitmqService';
 import { RabbitmqCmdExchangeMessage } from './RabbitmqCmdExchangeMessage';
 import { RabbitmqCmdExchangeMessageEntity } from './RabbitmqCmdExchangeMessageEntity';
