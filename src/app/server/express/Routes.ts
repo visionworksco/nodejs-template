@@ -17,7 +17,7 @@ import { JwtAuthService } from '../../api/auth/JwtAuthService';
 import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigRoute } from '../../api/config/ConfigRoute';
 import { ConfigService } from '../../api/config/ConfigService';
-import { ConfigEnvRepository } from '../../api/config/env/ConfigEnvRepository';
+import { ConfigEnvironmentRepository } from '../../api/config/environment/ConfigEnvironmentRepository';
 import { FileController } from '../../api/file/FileController';
 import { FileRoute } from '../../api/file/FileRoute';
 import { ProductMongoDbRepository } from '../../api/product/mongodb/ProductMongoDbRepository';
@@ -47,7 +47,7 @@ export class Routes {
   private authController: JwtAuthController | null = null;
   private authRoute: JwtAuthRoute | null = null;
 
-  private configRepository: ConfigEnvRepository | null = null;
+  private configRepository: ConfigEnvironmentRepository | null = null;
   private configService: ConfigService | null = null;
   private configController: ConfigController | null = null;
   private configRoute: ConfigRoute | null = null;
@@ -90,7 +90,7 @@ export class Routes {
       this.fileRoute = new FileRoute(this.fileController);
       this.registerRoute(this.fileRoute);
 
-      this.configRepository = new ConfigEnvRepository();
+      this.configRepository = new ConfigEnvironmentRepository();
       this.configService = new ConfigService(this.configRepository);
       this.configController = new ConfigController(this.configService);
       this.configRoute = new ConfigRoute(this.configController);

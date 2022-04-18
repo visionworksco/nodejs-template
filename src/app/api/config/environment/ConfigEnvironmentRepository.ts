@@ -8,7 +8,7 @@ import { ClassTransformer } from '../../../class/ClassTransformer';
 import { Config } from '../../../config/Config';
 import { ConfigEntity } from '../ConfigEntity';
 
-export class ConfigEnvRepository implements Repository<ConfigEntity> {
+export class ConfigEnvironmentRepository implements Repository<ConfigEntity> {
   async findAll(pageRequest: PageRequest): Promise<PageResult<ConfigEntity>> {
     throw ServerException.NotImplementedException();
   }
