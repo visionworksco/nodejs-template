@@ -25,6 +25,8 @@ const produce = async (): Promise<void> => {
 
     const messageInvalid: AmpqCmdExchangeMessage = {
       ...messageValid,
+      to: 'cockpit',
+      from: 'stromtanke',
       arguments:
         '{"customer":"TM","requestID":"31ed770b-3f4d-4f2e-a6f9-32385be9dd75","grid":"RWE","volume":15.4,"priceCent":null,"duration":4,"localDateTime":"2021-03-17T21:00:00+01:00","strategy":null},{"customer":"TM","requestID":"31ed770b-3f4d-4f2e-a6f9-32385be9dd99","grid":"EON","volume":20.7,"priceCent":null,"duration":1,"localDateTime":"2021-03-17T21:00:00+01:00","strategy":null}',
     };
@@ -56,5 +58,3 @@ const produce = async (): Promise<void> => {
 };
 
 produce();
-
-export {};

@@ -1,6 +1,1 @@
-export type AmpqCmdExchangeMessageAction =
-  | 'addNewOrder'
-  | 'addNewLimitOrder'
-  | 'deleteLimitOrder'
-  | 'addNewStrategy'
-  | 'addNewCustomerStrategyIDMP';
+export type AmpqCmdExchangeMessageAction = 'addNewOrder' | 'addNewLimitOrder';

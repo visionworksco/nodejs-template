@@ -1,1 +1,1 @@
-export type AmpqExchangeName = 'CMD' | 'EnobotHB';
+export type AmpqExchangeName = 'CMD';

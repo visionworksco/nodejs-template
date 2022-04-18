@@ -1,4 +1,3 @@
-rabbitmq
 refactor messageBroker
 
 swagger, rename src/docs -> src/doc

@@ -37,7 +37,7 @@ export class AmpqCmdExchangeService extends BaseAmpqService {
 
           // process only 'cockpit' related messages
           if (messagePayload.to === 'cockpit') {
-            Logger.log('process only "cockpit" related messages...');
+            Logger.log('Successfully processed "cockpit" related messages...');
           }
 
           if (EnvironmentUtils.isDebug()) {
