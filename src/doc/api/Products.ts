@@ -2,16 +2,16 @@ import { SwaggerConstants } from '../SwaggerConstants';
 import { SwaggerCrudApiDocs } from '../SwaggerCrudApiDocs';
 
 const apiDocs = new SwaggerCrudApiDocs(
-  '/heartbeats',
-  [SwaggerConstants.Tag.HEARTBEATS],
-  null,
-  'heartbeats',
-  '#/components/schemas/Heartbeats',
-  null,
-  ['findAll'],
+  '/products',
+  [SwaggerConstants.Tag.PRODUCTS],
+  'product',
+  'products',
+  '#/components/schemas/Product',
+  '#/components/schemas/ProductPayload',
+  ['*'],
 );
 
-export const Heartbeats = {
+export const Products = {
   paths: {
     ...apiDocs.getPaths().paths,
   },

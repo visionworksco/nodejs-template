@@ -16,7 +16,7 @@ import {
 } from '@visionworksco/nodejs-middleware';
 import express, { Application } from 'express';
 import swaggerUI from 'swagger-ui-express';
-import apiDocs from '../../../docs';
+import apiDoc from '../../../doc';
 import { RabbitmqCmdExchangeService } from '../../api/rabbitmq/rabbitmqCmdExchange/RabbitmqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
@@ -80,7 +80,7 @@ export class Server {
         this.app.use(HttpLogger());
       }
       this.app.use(this.fileUploadPath, StaticFolderRegister(this.fileUploadPath));
-      this.app.use(this.apiDocPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
+      this.app.use(this.apiDocPath, swaggerUI.serve, swaggerUI.setup(apiDoc));
 
       this.onStop();
     } catch (error) {
@@ -108,11 +108,13 @@ export class Server {
       // server
       Logger.log(`[${this.name}] starting server...`);
       this.app.listen(this.port, () => {
+        const serverUrl = `http://localhost:${this.port}`;
         Logger.log(
-          `[${this.name}] started at http://localhost:${
-            this.port
-          } in environment ${EnvironmentUtils.getEnv()}`,
+          `[${this.name}] started at ${serverUrl} in environment ${EnvironmentUtils.getEnv()}`,
         );
+
+        //swagger doc
+        Logger.log(`[Swagger] started API docs at ${serverUrl}${this.apiDocPath}`);
       });
 
       // message broker
