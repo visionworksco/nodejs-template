@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
+import { MongoDbEntity } from '../../../repository/mongodb/MongoDbEntity';
 
 const { model, Schema } = mongoose;
 
 export const ProductSchema = new Schema(
   {
+    ...MongoDbEntity.obj,
     name: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, required: true },

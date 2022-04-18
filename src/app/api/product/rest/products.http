@@ -5,8 +5,8 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @contentTypeFormData = multipart/form-data
-@entityId = 625c87472b7e7b72f285fd24
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjODcxOTJiN2U3YjcyZjI4NWZkMTciLCJpYXQiOjE2NTAyMzkxODIsImV4cCI6MTY1MDI2Nzk4Mn0.-cHz6W4JBZuIo42dBOXGZ7qFZKXcDJLR_Umr4zXb9ak
+@entityId = 625d5be99ba8f9fc327c01da
+@token = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjMjMxODc2OTYxNGQ2ZGM4ODY1OTEiLCJpYXQiOjE2NTAyODU0MTksImV4cCI6MTY1MDMxNDIxOX0.yHaMtz55To5SWCNlpIPCImTHNE7PUGyCa8m0KdR4uD8
 @authCookie = Authorization={{token}}; HttpOnly; Max-Age=28800
 @authHeader = Bearer {{token}}
 
@@ -50,7 +50,7 @@ Cookie: {{authCookie}}
 # Authorization: {{authHeader}}
 
 {
-    "name": "product6",
+    "name": "product1",
     "image": "/assets/images/airpods.jpg",
     "description": "description...",
     "brand": "Apple",
