@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore:next-line
+import packageJson from '../../package.json';
+
 export default {
   openapi: '3.0.3',
   info: {
-    title: 'Node.js template', // REQUIRED
-    version: '0.0.1', // REQUIRED
-    description: 'Node.js template API',
-    termsOfService: 'https://termsOfService.company.com',
+    title: packageJson.name, // REQUIRED
+    version: packageJson.version, // REQUIRED
+    description: packageJson.description,
     contact: {
-      name: 'John Doe',
-      email: 'john.doe@company.com',
-      url: 'https://contact.company.com',
+      name: packageJson.author,
+      url: packageJson.repository.url,
     },
     license: {
-      name: 'MIT', // REQUIRED
-      url: 'https://opensource.org/licenses/MIT',
+      name: packageJson.license, // REQUIRED
     },
   },
 };
