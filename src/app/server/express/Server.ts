@@ -56,10 +56,10 @@ export class Server {
       : null;
     this.storages = new Storages(this.psqlStorage, this.mongoDbStorage);
 
-    const rabbitMQService = Config.get('SERVICE_RABBITMQ')
+    const rabbitmqService = Config.get('SERVICE_RABBITMQ')
       ? new RabbitmqCmdExchangeService(new RabbitmqConfig())
       : null;
-    this.ampqServices = new AmpqServices(rabbitMQService);
+    this.ampqServices = new AmpqServices(rabbitmqService);
 
     this.routes = new Routes(this.app);
 

@@ -126,9 +126,13 @@ export class Routes {
 
   private afterRegister(): void {
     this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
+
     this.registerStatusRoute();
+
     this.registerProductionClientRoute();
+
     this.app.use(RootRoute.registerRoutes());
+
     this.app.use(UndefinedRoute);
   }
 
