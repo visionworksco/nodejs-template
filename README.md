@@ -6,4 +6,4 @@
 - npm run build
 - npm run commit
 - npm run release:[first|major|minor|patch]
-- git push
+- git push --follow-tags origin main
