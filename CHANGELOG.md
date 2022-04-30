@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/visionworksco/nodejs-template/compare/v0.1.1...v1.0.0) (2022-04-30)
+
+
+### Features
+
+* :rocket: ([201556c](https://github.com/visionworksco/nodejs-template/commit/201556c7443289a9066b011c55d82d104a2e6525))
+* :rocket: ([a41ea06](https://github.com/visionworksco/nodejs-template/commit/a41ea063e51325844dd68c0aef38d346b701d44b))
+* :rocket: ([149e187](https://github.com/visionworksco/nodejs-template/commit/149e187266d4fa868d4ce5b90d958ab9a35b6303))
+
 ### [0.1.1](https://github.com/visionworksco/nodejs-template/compare/v0.1.0...v0.1.1) (2022-04-30)
 
 
