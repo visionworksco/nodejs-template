@@ -19,7 +19,7 @@ Config
       'Origin,X-Requested-With,Content-Type,Accept,Authorization,Cookie',
     ACCESS_CONTROL_ALLOW_METHODS: 'HEAD, GET, POST, PATCH, DELETE, OPTIONS',
     HTTP_TIMEOUT: 10000,
-    API_DOC_PATH: '/api-doc',
+    API_DOCS_PATH: '/api-docs',
     JWT_SECRET: 'JWT_SECRET',
     FILE_UPLOAD_PATH: './public/static/uploads',
     CLIENT_BUILD_PATH: '/',

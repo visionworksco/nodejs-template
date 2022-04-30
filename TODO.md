@@ -1,5 +1,2 @@
 - test psql
-- setup, bulk operations with psql and mongodb -> setup.ts
-- esolve all todo in the middleware
-- sync swagger api doc app namem, version, description, etc. with package.json version
-- start:watch
+- setup: bulk operations with mongodb

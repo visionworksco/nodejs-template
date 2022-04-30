@@ -12,6 +12,6 @@ const http = (): AxiosInstance =>
     withCredentials: true,
   });
 
-export const BaseApi = {
+export const BaseHttp = {
   http,
 };

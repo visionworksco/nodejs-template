@@ -16,7 +16,7 @@ import {
 } from '@visionworksco/nodejs-middleware';
 import express, { Application } from 'express';
 import swaggerUI from 'swagger-ui-express';
-import apiDoc from '../../../doc';
+import apiDoc from '../../../docs';
 import { RabbitmqCmdExchangeService } from '../../api/rabbitmq/rabbitmqCmdExchange/RabbitmqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
@@ -38,13 +38,14 @@ export class Server {
   private routes: Routes;
   private fileUploadPath: string;
   private apiDocPath: string;
+  private test = '';
 
   constructor() {
     this.app = express();
     this.name = 'Express.js';
     this.port = Number(Config.get('PORT'));
 
-    this.apiDocPath = Config.get('API_DOC_PATH');
+    this.apiDocPath = Config.get('API_DOCS_PATH');
 
     this.fileUploadPath = Config.get('FILE_UPLOAD_PATH');
 
