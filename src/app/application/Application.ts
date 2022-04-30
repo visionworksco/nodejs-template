@@ -1,8 +1,10 @@
 import { ExceptionHandler, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore:next-line
+import packageJson from '../../../package.json';
 import { Environment } from '../environment/Environment';
 import { Server } from '../server/express/Server';
-const packageJson = require('../../../package.json');
 
 export class Application {
   private name: string;
@@ -18,7 +20,9 @@ export class Application {
     try {
       Logger.log(`[${this.name}] starting...`);
       await this.server.start();
-      Logger.log(`[${this.name}] started ${packageJson.name}:${packageJson.version}`);
+      Logger.log(
+        `[${this.name}] started ${packageJson.name}:${packageJson.version} in environment ${process.env.NODE_ENV_NAME}`,
+      );
     } catch (error) {
       if (error instanceof Error) {
         ExceptionHandler.handle(error);

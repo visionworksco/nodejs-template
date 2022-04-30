@@ -10,7 +10,7 @@ Config
   // 2. Environment variables
   .env()
   // 3. Config file
-  .file({ file: path.join(__dirname, 'config.json') })
+  .file({ file: path.join(__dirname, '../../../config.json') })
   // 4. Defaults
   .defaults({
     API_VERSION: 'v1',
@@ -25,7 +25,7 @@ Config
     CLIENT_BUILD_PATH: '/',
     SERVICE_MONGODB: true,
     SERVICE_POSTGRESQL: false,
-    SERVICE_RABBITMQ: true,
+    SERVICE_RABBITMQ: false,
   })
   // 5. Required varaibles
   .required([]);
