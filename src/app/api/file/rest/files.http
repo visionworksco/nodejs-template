@@ -16,5 +16,4 @@ GET {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 ### save (upload)
-POST {{url}}?field=file&limitFileSize=4&imageFileType=true {{protocol}}
-Content-Type: {{contentTypeFormData}}
+POST {{url}}?field=upload_file&limitFileSize=4&imageFileType=true {{protocol}}

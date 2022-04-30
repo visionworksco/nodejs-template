@@ -1,7 +1,8 @@
-import { ExceptionHandler } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
-import ora from 'ora';
+import { ExceptionHandler, Logger } from '@visionworksco/nodejs-middleware';
 import 'reflect-metadata';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore:next-line
+import packageJson from '../../../package.json';
 import { Environment } from '../environment/Environment';
 import { Server } from '../server/express/Server';
 
@@ -11,17 +12,17 @@ export class Application {
 
   constructor() {
     this.name = 'Application';
-    new Environment();
+    Environment.init();
     this.server = new Server();
   }
 
   async start(): Promise<void> {
     try {
-      const consoleSpinner = ora();
-
-      consoleSpinner.start(`[${this.name}] starting...`);
+      Logger.log(`[${this.name}] starting...`);
       await this.server.start();
-      consoleSpinner.succeed(chalk.green(`[${this.name}] started`));
+      Logger.log(
+        `[${this.name}] started ${packageJson.name}:${packageJson.version} in environment ${process.env.NODE_ENV_NAME}`,
+      );
     } catch (error) {
       if (error instanceof Error) {
         ExceptionHandler.handle(error);

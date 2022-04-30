@@ -1,5 +1,6 @@
 import { AuthData, AuthService, BaseAuthController } from '@visionworksco/nodejs-middleware';
 import { ClassTransformer } from '../../class/ClassTransformer';
+import { Config } from '../../config/Config';
 import { UserEntity } from '../user/UserEntity';
 
 export class JwtAuthController extends BaseAuthController<UserEntity> {
@@ -8,11 +9,11 @@ export class JwtAuthController extends BaseAuthController<UserEntity> {
   }
 
   protected authCookieConfigHttpOnly(): boolean {
-    return process.env.NODE_ENV !== 'development';
+    return !['development', 'development.local'].includes(Config.get('NODE_ENV'));
   }
 
   protected authCookieConfigSecure(): boolean {
-    return process.env.NODE_ENV !== 'development';
+    return !['development', 'development.local'].includes(Config.get('NODE_ENV'));
   }
 
   protected normalize(entity: Object | null): UserEntity {

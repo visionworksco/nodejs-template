@@ -4,8 +4,8 @@
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5ffd7325a01a777e959248a1
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmZkNzMyNWEwMWE3NzdlOTU5MjQ4YTEiLCJpYXQiOjE2MTA0NDU2MDUsImV4cCI6MTYxMDQ3NDQwNX0.I3UQ2cG6ydy6ACmAFlgWG7KMLQQHqoUQCXLjKa5w3C8
+@entityId = 625c340a362b6e9bbcd44a2f
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjVjMjMxODc2OTYxNGQ2ZGM4ODY1OTEiLCJpYXQiOjE2NTAyMDk2NjksImV4cCI6MTY1MDIzODQ2OX0.wHltLfHEiX-jSrImOrFKcZd9Nn0IvaHVjz3o3N0IyhQ
 
 ### findAll
 GET {{url}} {{protocol}}
@@ -23,9 +23,9 @@ Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
 {
-"name": "jdoe3",
-"email": "jdoe3@company.com",
-"password": "12345678",
+"name": "jdoe1",
+"email": "jdoe1@company.com",
+"password": "12345678"
 }
 
 ### updateById

@@ -2,7 +2,7 @@ import { ApiRole } from '../ApiRole';
 
 export const Public: ApiRole = {
   product: {
-    findAll: true,
+    findAll: false,
     findById: false,
     save: false,
     updateById: true,

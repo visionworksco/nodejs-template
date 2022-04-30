@@ -2,7 +2,6 @@ import {
   RootRoute,
   Route,
   StaticFolderRegister,
-  Storage,
   UndefinedRoute,
 } from '@visionworksco/nodejs-middleware';
 import { Application, Request, Response } from 'express';
@@ -18,7 +17,7 @@ import { JwtAuthService } from '../../api/auth/JwtAuthService';
 import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigRoute } from '../../api/config/ConfigRoute';
 import { ConfigService } from '../../api/config/ConfigService';
-import { ConfigEnvRepository } from '../../api/config/env/ConfigEnvRepository';
+import { ConfigEnvironmentRepository } from '../../api/config/environment/ConfigEnvironmentRepository';
 import { FileController } from '../../api/file/FileController';
 import { FileRoute } from '../../api/file/FileRoute';
 import { ProductMongoDbRepository } from '../../api/product/mongodb/ProductMongoDbRepository';
@@ -48,7 +47,7 @@ export class Routes {
   private authController: JwtAuthController | null = null;
   private authRoute: JwtAuthRoute | null = null;
 
-  private configRepository: ConfigEnvRepository | null = null;
+  private configRepository: ConfigEnvironmentRepository | null = null;
   private configService: ConfigService | null = null;
   private configController: ConfigController | null = null;
   private configRoute: ConfigRoute | null = null;
@@ -68,15 +67,15 @@ export class Routes {
 
   constructor(app: Application) {
     this.app = app;
-    this.apiVersion = Config.get('AppConfig').API_VERSION;
+    this.apiVersion = Config.get('API_VERSION');
     this.baseUrl = `/${this.apiVersion}/api`;
   }
 
-  async register(storage: Storage): Promise<void> {
+  async register(psqlStorage: PsqlStorage | null): Promise<void> {
     try {
       // PostgreSQL pool object
-      if (storage instanceof PsqlStorage) {
-        this.psqlPool = storage.psql;
+      if (psqlStorage) {
+        this.psqlPool = psqlStorage.psql;
       }
 
       if (this.psqlPool) {
@@ -91,7 +90,7 @@ export class Routes {
       this.fileRoute = new FileRoute(this.fileController);
       this.registerRoute(this.fileRoute);
 
-      this.configRepository = new ConfigEnvRepository();
+      this.configRepository = new ConfigEnvironmentRepository();
       this.configService = new ConfigService(this.configRepository);
       this.configController = new ConfigController(this.configService);
       this.configRoute = new ConfigRoute(this.configController);
@@ -127,9 +126,13 @@ export class Routes {
 
   private afterRegister(): void {
     this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
+
     this.registerStatusRoute();
+
     this.registerProductionClientRoute();
+
     this.app.use(RootRoute.registerRoutes());
+
     this.app.use(UndefinedRoute);
   }
 
@@ -144,11 +147,11 @@ export class Routes {
   };
 
   private registerProductionClientRoute = (): void => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (Config.get('NODE_ENV') !== 'production') {
       return;
     }
 
-    const clientBuildPath = process.env.CLIENT_BUILD_PATH || '/';
+    const clientBuildPath = Config.get('CLIENT_BUILD_PATH');
     this.app.use(StaticFolderRegister(`${clientBuildPath}`));
 
     this.app.get('*', (req: Request, res: Response) => {

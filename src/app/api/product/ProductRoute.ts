@@ -1,7 +1,7 @@
 import {
   AuthData,
   Authenticate,
-  Authorize,
+  AuthorizeDefault,
   AuthorizeUser,
   AuthService,
   BaseCrudController,
@@ -33,6 +33,10 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     this.registerAdditionalRoutes();
   }
 
+  getBaseUrl(): string {
+    return '/products';
+  }
+
   private registerAdditionalRoutes() {
     this.router.post(`${this.getBaseUrl()}/upload`, [this.upload]);
   }
@@ -45,10 +49,6 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     }
   };
 
-  getBaseUrl(): string {
-    return '/products';
-  }
-
   protected saveHandlers = (handlerId?: string): RequestHandler[] => [
     Authenticate(this.authService),
     AuthorizeUser(Context.getInstance().applicationRoles, this.permissionSchemaId, handlerId),
@@ -56,9 +56,9 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   ];
 
   protected updateByIdHandlers = (handlerId?: string): RequestHandler[] => [
-    Authorize(Public, this.permissionSchemaId, handlerId),
+    AuthorizeDefault(Public, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
-    Authorize(Authenticated, this.permissionSchemaId, handlerId),
+    AuthorizeDefault(Authenticated, this.permissionSchemaId, handlerId),
     AuthorizeUser(Context.getInstance().applicationRoles, this.permissionSchemaId, handlerId),
     this.updateById,
   ];

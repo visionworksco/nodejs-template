@@ -135,35 +135,42 @@ export default {
           },
         },
       },
-      Info: {
+      Product: {
         type: 'object',
-        required: ['name', 'version'],
-        properties: {
-          name: {
-            type: 'string',
-            description: 'Name',
-            example: 'intraday-cockpit-back',
-          },
-          version: {
-            type: 'string',
-            description: 'Version',
-            example: '0.0.12',
-          },
-        },
-      },
-      Account: {
-        type: 'object',
-        required: ['id', 'name', 'email', 'password'],
+        required: [
+          'id',
+          'name',
+          'image',
+          'description',
+          'brand',
+          'category',
+          'price',
+          'countInStock',
+          'rating',
+          'numReviews',
+          'user',
+        ],
         properties: {
           ...SwaggerCommon.schema.Entity.properties,
-          ...SwaggerCommon.schema.Account.properties,
+          ...SwaggerCommon.schema.Product.properties,
         },
       },
-      AccountPayload: {
+      ProductPayload: {
         type: 'object',
-        required: ['name', 'email', 'password'],
+        required: [
+          'name',
+          'image',
+          'description',
+          'brand',
+          'category',
+          'price',
+          'countInStock',
+          'rating',
+          'numReviews',
+          'user',
+        ],
         properties: {
-          ...SwaggerCommon.schema.Account.properties,
+          ...SwaggerCommon.schema.Product.properties,
         },
       },
     },

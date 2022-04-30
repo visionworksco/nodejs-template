@@ -6,9 +6,9 @@ const Entity = {
   properties: {
     id: {
       type: 'string',
-      format: SwaggerConstants.Format.SQL_ID,
+      format: SwaggerConstants.Format.MONGODB_ID,
       description: SwaggerConstants.Description.UNIQUE_ID,
-      example: SwaggerConstants.Example.SQL_ID,
+      example: SwaggerConstants.Example.MONGODB_ID,
     },
     createdAt: {
       type: 'string',
@@ -35,174 +35,65 @@ const Entity = {
   },
 };
 
-const Account = {
+const Product = {
   properties: {
     name: {
       type: 'string',
       description: 'Name',
-      example: SwaggerConstants.Example.NAME,
+      example: 'Airpods',
     },
-    email: {
+    image: {
       type: 'string',
-      format: SwaggerConstants.Format.EMAIL,
-      description: 'Email',
-      example: SwaggerConstants.Example.EMAIL,
+      description: 'Image path',
+      example: '/assets/images/airpods.jpg',
     },
-    password: {
+    description: {
       type: 'string',
-      format: SwaggerConstants.Format.PASSWORD,
-      description: 'Password. Always empty.',
-      example: '',
+      description: 'Description',
+      example: 'Product description...',
     },
-    groups: {
+    brand: {
+      type: 'string',
+      description: 'Brand',
+      example: 'Apple',
+    },
+    category: {
+      type: 'string',
+      description: 'Category',
+      example: 'Electronics',
+    },
+    price: {
+      type: 'number',
+      description: 'Price',
+      example: '95.99',
+    },
+    countInStock: {
+      type: 'number',
+      description: 'Count in stock',
+      example: '45',
+    },
+    rating: {
+      type: 'number',
+      description: 'rating',
+      example: 4.5,
+    },
+    numReviews: {
+      type: 'number',
+      description: 'Number of reviews',
+      example: 12,
+    },
+    user: {
+      type: 'string',
+      description: 'User id',
+      example: SwaggerConstants.Example.MONGODB_ID,
+    },
+    reviews: {
       type: 'array',
-      items: {
-        type: 'string',
-      },
-      description: 'Groups',
-      example: ['intraday-cockpit-admins'],
-    },
-    permissions: {
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-      description: 'Permissions',
-      example: ['appAdmin:intraday-cockpit', 'intraday-cockpit'],
-    },
-    roles: {
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-      description: 'Roles',
-      example: ['intraday-cockpit'],
-    },
-  },
-};
-
-const ChartWidget = {
-  properties: {
-    name: {
-      type: 'string',
-      description: 'Name',
-      example: 'chart1',
-    },
-    data: {
-      $ref: '#/components/schemas/ChartWidgetData',
-    },
-  },
-};
-
-const AccountChartWidget = {
-  properties: {
-    accountId: {
-      type: 'number',
-      description: 'Account id',
-      example: '1',
-    },
-    chartWidgetId: {
-      type: 'number',
-      description: 'Chart widget id',
-      example: '2',
-    },
-  },
-};
-
-const AmpqEnobotOrder = {
-  properties: {
-    customer: {
-      type: 'string',
-      description: 'Customer',
-      example: 'TM',
-    },
-    requestID: {
-      type: 'string',
-      format: SwaggerConstants.Format.UUID,
-      description: 'Request id',
-      example: SwaggerConstants.Example.UUID,
-    },
-    grid: {
-      type: 'string',
-      description: 'Grid',
-      example: 'RWE',
-    },
-    volume: {
-      type: 'number',
-      description: 'Volume (Mw)',
-      example: 15.4,
-    },
-    priceCent: {
-      type: 'number',
       nullable: true,
-      description: 'Price in cents (EUR)',
-      example: null,
-    },
-    duration: {
-      type: 'number',
-      description: 'Number of quarters in an hour',
-      example: 4,
-    },
-    localDateTime: {
-      type: 'string',
-      format: SwaggerConstants.Format.DATE_TIME,
-      description: 'Local datetime',
-      example: SwaggerConstants.Example.DATE_TIME,
-    },
-    strategy: {
-      type: 'string',
-      nullable: true,
-      description: 'Strategy',
-      example: null,
-    },
-  },
-};
-
-const Settings = {
-  type: 'object',
-  properties: {
-    data: {
-      type: 'object',
-      properties: {
-        enobotRequest: {
-          type: 'object',
-          properties: {
-            grid: {
-              type: 'array',
-              items: {
-                type: 'string',
-              },
-              description: 'Grid',
-              example: ['RWE', 'EON', 'ENBW', 'VE'],
-            },
-            volumeMin: {
-              type: 'number',
-              description: 'Volume minimum',
-              example: 0.1,
-            },
-            volumeMax: {
-              type: 'number',
-              description: 'Volume maximum',
-              example: 50,
-            },
-            duration: {
-              type: 'array',
-              items: {
-                type: 'string',
-              },
-              description: 'Duration',
-              example: ['15min', '1h'],
-            },
-            limitType: {
-              type: 'array',
-              items: {
-                type: 'string',
-              },
-              description: 'Limit type',
-              example: ['MaxPrice', 'MinPrice'],
-            },
-          },
-        },
+      items: {
+        type: 'string',
+        description: 'Review id',
+        example: SwaggerConstants.Example.MONGODB_ID,
       },
     },
   },
@@ -261,11 +152,7 @@ export const SwaggerCommon = {
   schema: {
     Entity,
     Security,
-    Account,
-    ChartWidget,
-    AccountChartWidget,
-    AmpqEnobotOrder,
-    Settings,
+    Product,
   },
   response: {
     reponseOk,

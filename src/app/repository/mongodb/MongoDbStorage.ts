@@ -1,16 +1,18 @@
 import {
-  AppException,
+  ApplicationException,
   DbStorageConnection,
   Logger,
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 export class MongoDbStorage implements Storage {
+  private name: string;
   private connection: DbStorageConnection;
 
   constructor(connection: DbStorageConnection) {
+    this.name = 'MongoDB';
     this.connection = connection;
   }
 
@@ -21,24 +23,27 @@ export class MongoDbStorage implements Storage {
       }
 
       mongoose.connection.on('connected', () => {
-        Logger.log(`${this.connection.getInfo()}: connected`);
+        Logger.log(`[${this.name}] connected to ${this.connection.getInfo()}`);
       });
 
       mongoose.connection.on('disconnected', () => {
-        Logger.log(`${this.connection.getInfo()}: disconnected`);
+        Logger.log(`[${this.name}] disconnected`);
       });
 
       mongoose.connection.on('error', (error) => {
-        throw new AppException(StatusCode.INTERNAL_SERVER_ERROR, error);
+        throw new ApplicationException(StatusCode.INTERNAL_SERVER_ERROR, error);
       });
 
-      const connectionOptions = {
-        dbName: this.connection.database,
-        user: this.connection.user,
-        pass: this.connection.password,
+      const { host, port, database, user, password } = this.connection;
+      const connectionUrl = `mongodb://${host}:${port}`;
+
+      const connectionOptions: ConnectOptions = {
+        dbName: database,
+        user,
+        pass: password,
       };
 
-      await mongoose.connect(this.connection.host, connectionOptions);
+      await mongoose.connect(connectionUrl, connectionOptions);
     } catch (error) {
       return Promise.reject(error);
     }

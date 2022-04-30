@@ -1,28 +1,26 @@
 import {
-  AppException,
+  AmpqServices,
+  ApplicationException,
   CookieParser,
-  Cors,
+  CorsHandler,
   ExceptionHandler,
   HttpLogger,
   JsonParser,
   Logger,
-  ResponseHeaders,
+  ResponseHeadersHandler,
   ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
-  Storage,
   Storages,
   UrlEncoder,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
 import express, { Application } from 'express';
-import ora from 'ora';
 import swaggerUI from 'swagger-ui-express';
-import apiDocs from '../../../docs';
-import { AmpqCmdExchangeService } from '../../api/ampq/ampqCmdExchange/AmpqCmdExchangeService';
+import apiDoc from '../../../docs';
+import { RabbitmqCmdExchangeService } from '../../api/rabbitmq/rabbitmqCmdExchange/RabbitmqCmdExchangeService';
 import { Config } from '../../config/Config';
 import { EnvironmentUtils } from '../../environment/EnvironmentUtils';
-import { AmpqServices } from '../../messageBroker/AmpqServices';
+import { RabbitmqConfig } from '../../messageBroker/rabbitmq/RabbitmqConfig';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { PsqlStorage } from '../../repository/postgresql/PsqlStorage';
@@ -34,53 +32,61 @@ export class Server {
   private port: number;
   private app: Application;
   private storages: Storages;
-  private psqlStorage: Storage;
-  private mongoDbStorage: Storage;
+  private psqlStorage: PsqlStorage | null;
+  private mongoDbStorage: MongoDbStorage | null;
   private ampqServices: AmpqServices;
   private routes: Routes;
-  private fileUploadsPath: string;
-  private apiDocsPath: string;
+  private fileUploadPath: string;
+  private apiDocPath: string;
+  private test = '';
 
   constructor() {
     this.app = express();
     this.name = 'Express.js';
-    this.port = Number(process.env.PORT) || 3000;
+    this.port = Number(Config.get('PORT'));
 
-    this.fileUploadsPath = EnvironmentUtils.getFileUploadsPath();
-    this.apiDocsPath = EnvironmentUtils.getApiDocsPaths();
+    this.apiDocPath = Config.get('API_DOCS_PATH');
 
-    this.psqlStorage = new PsqlStorage(new PsqlStorageConnection());
-    this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
+    this.fileUploadPath = Config.get('FILE_UPLOAD_PATH');
+
+    this.psqlStorage = Config.get('SERVICE_POSTGRESQL')
+      ? new PsqlStorage(new PsqlStorageConnection())
+      : null;
+    this.mongoDbStorage = Config.get('SERVICE_MONGODB')
+      ? new MongoDbStorage(new MongoDbStorageConnection())
+      : null;
     this.storages = new Storages(this.psqlStorage, this.mongoDbStorage);
 
-    this.ampqServices = new AmpqServices(new AmpqCmdExchangeService());
+    const rabbitmqService = Config.get('SERVICE_RABBITMQ')
+      ? new RabbitmqCmdExchangeService(new RabbitmqConfig())
+      : null;
+    this.ampqServices = new AmpqServices(rabbitmqService);
 
     this.routes = new Routes(this.app);
 
     try {
       this.app.use(
-        ResponseHeaders(
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_ORIGIN,
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_HEADERS,
-          Config.get('AppConfig').ACCESS_CONTROL_ALLOW_METHODS,
+        ResponseHeadersHandler(
+          Config.get('ACCESS_CONTROL_ALLOW_ORIGIN'),
+          Config.get('ACCESS_CONTROL_ALLOW_HEADERS'),
+          Config.get('ACCESS_CONTROL_ALLOW_METHODS'),
         ),
       );
       this.app.use(JsonParser());
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
-      this.app.use(Cors());
-      if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development.local') {
+      this.app.use(CorsHandler());
+
+      if (['development', 'development.local'].includes(Config.get('NODE_ENV'))) {
         this.app.use(HttpLogger());
       }
-      this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
-      this.app.use(this.apiDocsPath, swaggerUI.serve, swaggerUI.setup(apiDocs));
+      this.app.use(this.fileUploadPath, StaticFolderRegister(this.fileUploadPath));
+      this.app.use(this.apiDocPath, swaggerUI.serve, swaggerUI.setup(apiDoc));
 
       this.onStop();
-
-      this.app.use(ServerExceptionHandler);
     } catch (error) {
       if (error instanceof Error) {
-        const appError = new AppException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
+        const appError = new ApplicationException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
         ExceptionHandler.handle(appError);
       }
     }
@@ -88,30 +94,35 @@ export class Server {
 
   async start(): Promise<void> {
     try {
-      const consoleSpinner = ora();
-
       // data storage
-      consoleSpinner.start('Connecting data storage...');
-      await this.storages.connect();
+      if (this.storages.size > 0) {
+        Logger.log(`[${this.name}] connecting data storage...`);
+        await this.storages.connect();
+      }
 
       // routes
       await this.routes.register(this.psqlStorage);
 
+      // exception handler
+      this.app.use(ServerExceptionHandler);
+
       // server
-      consoleSpinner.start('Starting server...');
+      Logger.log(`[${this.name}] starting server...`);
       this.app.listen(this.port, () => {
-        consoleSpinner.succeed(
-          chalk.green(
-            `[${this.name}] started at http://localhost:${
-              this.port
-            } in environment ${EnvironmentUtils.getEnv()}`,
-          ),
+        const serverUrl = `http://localhost:${this.port}`;
+        Logger.log(
+          `[${this.name}] started at ${serverUrl} in environment ${EnvironmentUtils.getEnv()}`,
         );
+
+        //swagger doc
+        Logger.log(`[Swagger] started API docs at ${serverUrl}${this.apiDocPath}`);
       });
 
       // message broker
-      consoleSpinner.start('Starting message broker...');
-      await this.ampqServices.start();
+      if (this.ampqServices.size > 0) {
+        Logger.log(`[${this.name}] starting message broker...`);
+        await this.ampqServices.start();
+      }
     } catch (error) {
       return Promise.reject(error);
     }

@@ -12,8 +12,4 @@ export const UserSchema = new Schema(
   { timestamps: true },
 );
 
-UserSchema.statics.getForeignKeys = function () {
-  return [];
-};
-
 export const UserModel = model('User', UserSchema);

@@ -5,9 +5,7 @@ import {
   StatusCode,
   Storage,
 } from '@visionworksco/nodejs-middleware';
-import chalk from 'chalk';
-import ora from 'ora';
-import pg from 'pg';
+import pg, { PoolConfig } from 'pg';
 
 export class PsqlStorage implements Storage {
   private _name: string;
@@ -20,11 +18,11 @@ export class PsqlStorage implements Storage {
     this.pool = null;
   }
 
-  get psql() {
+  get psql(): pg.Pool | null {
     return this.pool;
   }
 
-  get name() {
+  get name(): string {
     return this._name;
   }
 
@@ -32,7 +30,7 @@ export class PsqlStorage implements Storage {
     try {
       const { host, port, database, user, password } = this.connection;
 
-      const psqlConfig = {
+      const psqlConfig: PoolConfig = {
         host,
         port,
         database,
@@ -52,10 +50,7 @@ export class PsqlStorage implements Storage {
         throw ServerException.create(StatusCode.INTERNAL_SERVER_ERROR, error.message);
       });
 
-      const consoleSpinner = ora();
-      consoleSpinner.succeed(
-        chalk.green(`[${this._name}] connected to ${this.connection.getInfo()}`),
-      );
+      Logger.log(`[${this._name}] connected to ${this.connection.getInfo()}`);
 
       return Promise.resolve(this.pool);
     } catch (error) {

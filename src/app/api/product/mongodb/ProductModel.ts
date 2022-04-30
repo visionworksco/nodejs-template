@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
+import { MongoDbEntity } from '../../../repository/mongodb/MongoDbEntity';
 
 const { model, Schema } = mongoose;
 
 export const ProductSchema = new Schema(
   {
+    ...MongoDbEntity.obj,
     name: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, required: true },
@@ -14,14 +16,9 @@ export const ProductSchema = new Schema(
     rating: { type: Number, required: true, default: 0.0 },
     numReviews: { type: Number, required: true, default: 0 },
     user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    reviews: [{ type: Schema.Types.ObjectId, required: true, ref: 'Review' }],
-    _reviews: [{ type: Schema.Types.ObjectId, required: true, ref: 'Review' }],
+    reviews: [{ type: Schema.Types.ObjectId, required: false, ref: 'Review' }],
   },
   { timestamps: true },
 );
-
-ProductSchema.statics.getForeignKeys = function () {
-  return ['user', '_reviews'];
-};
 
 export const ProductModel = model('Product', ProductSchema);
