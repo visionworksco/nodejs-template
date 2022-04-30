@@ -5,5 +5,5 @@
 - npm run compile
 - npm run build
 - npm run commit
-- npm run npm:release:[first|major|minor|patch]
-- npm run npm:publish
+- npm run release:[first|major|minor|patch]
+- git push
