@@ -1,6 +1,6 @@
 {
   "name": "@visionworksco/nodejs-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Node.js template",
   "license": "MIT",
