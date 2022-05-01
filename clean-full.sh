@@ -17,6 +17,7 @@ rm -rf tsconfig.tsbuildinfo
 rm -rf tsconfig.build.tsbuildinfo
 rm -rf .git
 git init
+git checkout -b main
 
 echo "Manually update:"
 echo $PACKAGE $NAME
