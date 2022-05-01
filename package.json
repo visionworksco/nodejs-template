@@ -20,6 +20,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile && tsc -p tsconfig.build.json",
     "clean": "rimraf dist && rimraf coverage",
+    "clean:full": "./clean-full.sh",
     "commit": "git add . && git commit -m 'feat: :rocket:'",
     "compile": "tsc --noEmit",
     "compile:diagnostics": "tsc --noEmit --extendedDiagnostics",
