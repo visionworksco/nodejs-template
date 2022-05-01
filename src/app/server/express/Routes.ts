@@ -8,9 +8,9 @@ import { Application, Request, Response } from 'express';
 import path from 'path';
 import { Pool } from 'pg';
 import { AccountController } from '../../api/account/AccountController';
-import { AccountRepository } from '../../api/account/AccountRepository';
 import { AccountRoute } from '../../api/account/AccountRoute';
 import { AccountService } from '../../api/account/AccountService';
+import { AccountPsqlRepository } from '../../api/account/psql/AccountPsqlRepository';
 import { JwtAuthController } from '../../api/auth/JwtAuthController';
 import { JwtAuthRoute } from '../../api/auth/JwtAuthRoute';
 import { JwtAuthService } from '../../api/auth/JwtAuthService';
@@ -24,6 +24,10 @@ import { ProductMongoDbRepository } from '../../api/product/mongodb/ProductMongo
 import { ProductController } from '../../api/product/ProductController';
 import { ProductRoute } from '../../api/product/ProductRoute';
 import { ProductService } from '../../api/product/ProductService';
+import { SettingsController } from '../../api/settings/SettingsController';
+import { SettingsRepository } from '../../api/settings/SettingsRepository';
+import { SettingsRoute } from '../../api/settings/SettingsRoute';
+import { SettingsService } from '../../api/settings/SettingsService';
 import { UserMongoDbRepository } from '../../api/user/mongodb/UserMongoDbRepository';
 import { UserController } from '../../api/user/UserController';
 import { UserRoute } from '../../api/user/UserRoute';
@@ -37,6 +41,16 @@ export class Routes {
   private baseUrl: string;
   private routes: Route[] = [];
   private psqlPool: Pool | null = null;
+
+  private accountRepository: AccountPsqlRepository | null = null;
+  private accountService: AccountService | null = null;
+  private accountController: AccountController | null = null;
+  private accountRoute: AccountRoute | null = null;
+
+  private settingsRepository: SettingsRepository | null = null;
+  private settingsService: SettingsService | null = null;
+  private settingsController: SettingsController | null = null;
+  private settingsRoute: SettingsRoute | null = null;
 
   private userRepository: UserMongoDbRepository | null = null;
   private userService: UserService | null = null;
@@ -55,11 +69,6 @@ export class Routes {
   private fileController: FileController | null = null;
   private fileRoute: FileRoute | null = null;
 
-  private accountRepository: AccountRepository | null = null;
-  private accountService: AccountService | null = null;
-  private accountController: AccountController | null = null;
-  private accountRoute: AccountRoute | null = null;
-
   private productRepository: ProductMongoDbRepository | null = null;
   private productService: ProductService | null = null;
   private productController: ProductController | null = null;
@@ -73,17 +82,26 @@ export class Routes {
 
   async register(psqlStorage: PsqlStorage | null): Promise<void> {
     try {
+      this.userRepository = new UserMongoDbRepository();
+      this.authService = new JwtAuthService(this.userRepository);
+
       // PostgreSQL pool object
       if (psqlStorage) {
         this.psqlPool = psqlStorage.psql;
       }
 
       if (this.psqlPool) {
-        this.accountRepository = new AccountRepository(this.psqlPool);
+        this.accountRepository = new AccountPsqlRepository(this.psqlPool);
         this.accountService = new AccountService(this.accountRepository);
         this.accountController = new AccountController(this.accountService);
         this.accountRoute = new AccountRoute(this.accountController);
         this.registerRoute(this.accountRoute);
+
+        this.settingsRepository = new SettingsRepository(this.psqlPool);
+        this.settingsService = new SettingsService(this.settingsRepository);
+        this.settingsController = new SettingsController(this.settingsService);
+        this.settingsRoute = new SettingsRoute(this.settingsController, this.authService);
+        this.registerRoute(this.settingsRoute);
       }
 
       this.fileController = new FileController();
@@ -96,9 +114,6 @@ export class Routes {
       this.configRoute = new ConfigRoute(this.configController);
       this.registerRoute(this.configRoute);
 
-      this.userRepository = new UserMongoDbRepository();
-
-      this.authService = new JwtAuthService(this.userRepository);
       this.authController = new JwtAuthController(this.authService);
       this.authRoute = new JwtAuthRoute(this.authController);
       this.registerRoute(this.authRoute);

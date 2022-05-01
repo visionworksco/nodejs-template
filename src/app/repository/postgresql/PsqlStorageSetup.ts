@@ -1,4 +1,5 @@
 import { Logger } from '@visionworksco/nodejs-middleware';
+import SettingsDefault from '../../api/settings/data/SettingsDefault.json';
 import { Environment } from '../../environment/Environment';
 import { PsqlStorage } from './PsqlStorage';
 import { PsqlStorageConnection } from './PsqlStorageConnection';
@@ -51,6 +52,32 @@ export class PsqlStorageSetup {
       );
       `;
       await psql.query(sqlQuery);
+
+      // settings
+      sqlQuery = `
+    CREATE TABLE IF NOT EXISTS settings(
+      "id" SERIAL PRIMARY KEY,
+      "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      "createdAt" TEXT,
+      "createdBy" TEXT,
+      "updatedAt" TEXT,
+      "updatedBy" TEXT,
+      "data" JSON NOT NULL
+    );
+    `;
+      await psql.query(sqlQuery);
+
+      // settings default values
+      const createdAt = new Date().toJSON();
+      const createdBy = 'server';
+      const dataJson = SettingsDefault.data;
+
+      sqlQuery = `
+    INSERT INTO settings("createdAt", "createdBy", "data") 
+    VALUES($1, $2, $3) 
+    RETURNING *
+    `;
+      await psql.query(sqlQuery, [createdAt, createdBy, dataJson]);
 
       await psqlStorage.disconnect();
 

@@ -1,10 +1,10 @@
 import { PageRequest, PageResult, ServerException } from '@visionworksco/nodejs-middleware';
 import { Pool } from 'pg';
-import { BaseApiPsqlRepository } from '../../repository/postgresql/BaseApiPsqlRepository';
-import { PsqlTable } from '../../repository/postgresql/PsqlTable';
-import { AccountEntity } from './AccountEntity';
+import { BaseApiPsqlRepository } from '../../../repository/postgresql/BaseApiPsqlRepository';
+import { PsqlTable } from '../../../repository/postgresql/PsqlTable';
+import { AccountEntity } from '../AccountEntity';
 
-export class AccountRepository extends BaseApiPsqlRepository<AccountEntity> {
+export class AccountPsqlRepository extends BaseApiPsqlRepository<AccountEntity> {
   constructor(psql: Pool) {
     super(psql, PsqlTable.ACCOUNT, AccountEntity);
   }

@@ -1,11 +1,11 @@
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { AccountEntity } from './AccountEntity';
-import { AccountRepository } from './AccountRepository';
+import { AccountPsqlRepository } from './psql/AccountPsqlRepository';
 
 export class AccountService extends BaseApiCrudService<AccountEntity> {
-  private accountRepository: AccountRepository;
+  private accountRepository: AccountPsqlRepository;
 
-  constructor(repository: AccountRepository) {
+  constructor(repository: AccountPsqlRepository) {
     super(repository);
     this.accountRepository = repository;
   }
