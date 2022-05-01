@@ -1,5 +1,4 @@
-import { hideBin } from 'yargs/helpers';
-import yargs from 'yargs/yargs';
+import { Commander } from '@visionworksco/nodejs-middleware';
 import { Environment } from '../environment/Environment';
 import { MongoDbStorageSetup } from '../repository/mongodb/MongoDbStorageSetup';
 import { PsqlStorageSetup } from '../repository/postgresql/PsqlStorageSetup';
@@ -7,18 +6,16 @@ import { PsqlStorageSetup } from '../repository/postgresql/PsqlStorageSetup';
 Environment.init();
 
 const run = async () => {
-  const argv = yargs(hideBin(process.argv))
-    .options({
-      action: { type: 'string', default: 'create' },
-    })
-    .parseSync();
+  const arg = Commander.arg({
+    action: { type: 'string', default: 'create' },
+  });
 
   const psqlStorageSetup = new PsqlStorageSetup();
   const mongoDbStorageSetup = new MongoDbStorageSetup();
 
-  switch (argv.action) {
+  switch (arg.action) {
     case 'create':
-      // await psqlStorageSetup.create();
+      await psqlStorageSetup.create();
       await mongoDbStorageSetup.create();
       break;
     case 'delete':

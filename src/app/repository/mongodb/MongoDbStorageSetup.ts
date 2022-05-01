@@ -1,7 +1,6 @@
-import { Logger } from '@visionworksco/nodejs-middleware';
+import { BaseDbStorageSetup, Logger } from '@visionworksco/nodejs-middleware';
 import Products from '../../api/product/data/Products.json';
 import { ProductModel } from '../../api/product/mongodb/ProductModel';
-import { BaseDbStorageSetup } from '../setup/BaseDbStorageSetup';
 import { MongoDbStorage } from './MongoDbStorage';
 import { MongoDbStorageConnection } from './MongoDbStorageConnection';
 

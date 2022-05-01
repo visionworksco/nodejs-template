@@ -1,6 +1,5 @@
-import { Logger, ServerException } from '@visionworksco/nodejs-middleware';
+import { BaseDbStorageSetup, Logger, ServerException } from '@visionworksco/nodejs-middleware';
 import SettingsDefault from '../../api/settings/data/SettingsDefault.json';
-import { BaseDbStorageSetup } from '../setup/BaseDbStorageSetup';
 import { PsqlStorage } from './PsqlStorage';
 import { PsqlStorageConnection } from './PsqlStorageConnection';
 import { PsqlTable } from './PsqlTable';
