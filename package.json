@@ -1,6 +1,6 @@
 {
   "name": "@visionworksco/nodejs-template",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "Node.js template",
   "license": "MIT",
@@ -36,6 +36,7 @@
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
+    "release:publish": "git push --follow-tags origin main",
     "setup:app": "ts-node ./src/app/setup/Setup.ts --action=create",
     "setup:app:dev": "cross-env NODE_ENV=development.local npm run setup:app",
     "start": "npm run start:dev:mock",
