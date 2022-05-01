@@ -15,7 +15,7 @@ export const ProductSchema = new Schema(
     countInStock: { type: Number, required: true, default: 0 },
     rating: { type: Number, required: true, default: 0.0 },
     numReviews: { type: Number, required: true, default: 0 },
-    user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+    user: { type: Schema.Types.ObjectId, required: false, ref: 'User' },
     reviews: [{ type: Schema.Types.ObjectId, required: false, ref: 'Review' }],
   },
   { timestamps: true },

@@ -54,6 +54,7 @@ export class ProductEntity extends MongoDbApiEntity implements Product {
   @Expose()
   @Type(() => ObjectId)
   @Transform(MongoDbUtils.toObjectId('user'), { toClassOnly: true })
+  @IsOptional()
   @IsMongoId()
   @IsNotEmpty()
   user = '';

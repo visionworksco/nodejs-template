@@ -1,11 +1,9 @@
-import { Logger } from '@visionworksco/nodejs-middleware';
+import { Logger, ServerException } from '@visionworksco/nodejs-middleware';
 import SettingsDefault from '../../api/settings/data/SettingsDefault.json';
-import { Environment } from '../../environment/Environment';
+import { BaseDbStorageSetup } from '../setup/BaseDbStorageSetup';
 import { PsqlStorage } from './PsqlStorage';
 import { PsqlStorageConnection } from './PsqlStorageConnection';
 import { PsqlTable } from './PsqlTable';
-
-Environment.init();
 
 const SQL_QUERY_BASE_API_ENTITY = `"id" SERIAL PRIMARY KEY,
         "_createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -14,21 +12,23 @@ const SQL_QUERY_BASE_API_ENTITY = `"id" SERIAL PRIMARY KEY,
         "updatedAt" TEXT,
         "updatedBy" TEXT,`;
 
-export class PsqlStorageSetup {
-  async run(): Promise<void> {
+export class PsqlStorageSetup extends BaseDbStorageSetup {
+  constructor() {
+    super(new PsqlStorageConnection());
+  }
+
+  async create(): Promise<void> {
     try {
-      const psqlConnection = new PsqlStorageConnection();
-      let psqlStorage = null;
       let psql = null;
       let sqlQuery = '';
 
       // postgres db (system db), we need this to obtain a connection to create other db's
       try {
-        const psqlConnectionSystem = new PsqlStorageConnection('postgres');
-        psqlStorage = new PsqlStorage(psqlConnectionSystem);
-        psql = await psqlStorage.connect();
+        const dbStorageConnectionSystem = new PsqlStorageConnection('postgres');
+        this.dbStorage = new PsqlStorage(dbStorageConnectionSystem);
+        psql = await this.dbStorage.connect();
 
-        sqlQuery = `CREATE DATABASE ${psqlConnection.database};`;
+        sqlQuery = `CREATE DATABASE ${this.dbStorageConnection.database};`;
         await psql.query(sqlQuery);
       } catch (error) {
         // skipping create database error,
@@ -36,8 +36,8 @@ export class PsqlStorageSetup {
       }
 
       // defined db
-      psqlStorage = new PsqlStorage(psqlConnection);
-      psql = await psqlStorage.connect();
+      this.dbStorage = new PsqlStorage(this.dbStorageConnection);
+      psql = await this.dbStorage.connect();
 
       // Account table
       sqlQuery = `
@@ -79,13 +79,14 @@ export class PsqlStorageSetup {
     `;
       await psql.query(sqlQuery, [createdAt, createdBy, dataJson]);
 
-      await psqlStorage.disconnect();
-
-      Logger.log(`[${psqlStorage.name}] setup done`);
-
-      return Promise.resolve();
+      await this.done();
     } catch (error) {
       Logger.error(error);
+      await this.exit(1);
     }
+  }
+
+  async delete(): Promise<void> {
+    throw ServerException.NotImplementedException();
   }
 }

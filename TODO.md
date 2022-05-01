@@ -1,2 +1,0 @@
-- test psql
-- setup: bulk operations with mongodb

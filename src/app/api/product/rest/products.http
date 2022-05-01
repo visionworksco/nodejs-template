@@ -25,7 +25,6 @@ OPTIONS {{url}}/{{entityId}} {{protocol}}
 ### findAll
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Authorization: {{authHeader}}
 
 ### findAll with params
 GET {{url}}?keyword=product {{protocol}}

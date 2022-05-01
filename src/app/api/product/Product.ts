@@ -10,6 +10,6 @@ export interface Product extends ApiEntity {
   countInStock: number;
   rating: number;
   numReviews: number;
-  user: string; // reference: Product MANY_TO_ONE User
+  user?: string; // reference: Product MANY_TO_ONE User
   reviews?: string[]; // reference: Review MANY_TO_ONE Product
 }

@@ -20,9 +20,7 @@ export class Application {
     try {
       Logger.log(`[${this.name}] starting...`);
       await this.server.start();
-      Logger.log(
-        `[${this.name}] started ${packageJson.name}:${packageJson.version} in environment ${process.env.NODE_ENV_NAME}`,
-      );
+      Logger.log(`[${this.name}] started ${packageJson.name}:${packageJson.version}`);
     } catch (error) {
       if (error instanceof Error) {
         ExceptionHandler.handle(error);
