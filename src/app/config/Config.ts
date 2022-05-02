@@ -24,7 +24,7 @@ Config
     FILE_UPLOAD_PATH: './public/static/uploads',
     CLIENT_BUILD_PATH: '/',
     SERVICE_MONGODB: true,
-    SERVICE_POSTGRESQL: true,
+    SERVICE_POSTGRESQL: false,
     SERVICE_RABBITMQ: false,
   })
   // 5. Required varaibles
